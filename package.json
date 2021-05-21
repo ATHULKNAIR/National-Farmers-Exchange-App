@@ -1,0 +1,25 @@
+{
+  "name": "mycapstart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "cd NFE-backend && npm start",
+    "frontend": "cd NFE-frontend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haswanth333/FarmerAPP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Haswanth333/FarmerAPP/issues"
+  },
+  "homepage": "https://github.com/Haswanth333/FarmerAPP#readme",
+  "dependencies": {
+    "concurrently": "^6.1.0"
+  }
+}
