@@ -50,7 +50,7 @@ const farmerSchema = new mongoose.Schema({
         type: ObjectId,
         ref : "FarmerOrder"
     }],
-    buyerOrderHistory :[{
+    agreedOrderHistory :[{
         type: ObjectId,
         ref : "BuyerOrder"
     }]

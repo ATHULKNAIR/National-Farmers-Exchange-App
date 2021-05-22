@@ -128,7 +128,8 @@ const buyerCtrl = {
                 order: buyer.order,
                 location: buyer.location,
                 gender: buyer.gender,
-                notification: buyer.notification
+                notification: buyer.notification,
+                product : buyer.product
 
 
             });
@@ -320,6 +321,9 @@ const buyerCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    /////////////////////////////////////  NOTIFICATION  //////////////////////////////////////////
+
     getNotification: async (req, res) => {
         try {
             const notification = await BuyerNotification.find({ createdBy: req.userId })
@@ -331,7 +335,11 @@ const buyerCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-    }, agreeFarmerOrder: async (req, res) => {
+    }, 
+
+    /////////////////////////////////////  AGREE FARMERS' ORDER  //////////////////////////////////
+    
+    agreeFarmerOrder: async (req, res) => {
         try {
             const order = await FarmerOrder.findOne({ _id: req.params.id }).select()
                 .populate({ path: "createdBy", select: "name phoneNo" });
@@ -352,7 +360,7 @@ const buyerCtrl = {
                 await buyerNotification.save();
 
                 await Buyer.findByIdAndUpdate({ _id: req.userId }, {
-                    $push: { notification: buyerNotification._id }
+                    $push: { notification: buyerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 await FarmerOrder.findOneAndUpdate({ _id: req.params.id }, {
                     boughtBy: req.userId, isActive: false
@@ -365,7 +373,7 @@ const buyerCtrl = {
 
                 await farmerNotification.save();
                 await Farmer.findOneAndUpdate({ _id: farmer }, {
-                    $push: { notification: farmerNotification._id }
+                    $push: { notification: farmerNotification._id, myOrderHistory: req.params.id }
                 })
                 res.json("Agreed to this Offer")
             } else {
@@ -375,6 +383,8 @@ const buyerCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    ////////////////////////////////////////  REJECT FARMERS' BID  ///////////////////////////////
 
     reject_FarmerBid: async (req, res) => {
         try {
@@ -414,6 +424,9 @@ const buyerCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    //////////////////////////////////////////// ACCEPT FARMERS' BID  //////////////////////////////
+
     accept_FarmerBid: async (req, res) => {
         try {
             const buyer = await BuyerOrder.findOne({ _id: req.params.id })
@@ -424,7 +437,7 @@ const buyerCtrl = {
             const farmerId = buyer.bidBy
             const isBid = buyer.isBid
 
-            const farmer= await Farmer.findOne({_id:farmerId})
+            const farmer = await Farmer.findOne({ _id: farmerId })
 
             // res.json(farmer.phoneNo)
             if (isBid) {
@@ -432,19 +445,19 @@ const buyerCtrl = {
                     message: `Your Bid for Order, id : ${req.params.id}, is accepted. You can contact ${BuyerName} with Phone Number : ${BuyerPhone} `,
                     createdBy: farmerId
                 })
-                await Farmer.findByIdAndUpdate({_id:farmerId}, {
-                    $push: { notification: farmerNotification._id }
+                await Farmer.findByIdAndUpdate({ _id: farmerId }, {
+                    $push: { notification: farmerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 let buyerNotification = new BuyerNotification({
                     message: `You accepted a BID for Order id : ${req.params.id}. You can contact ${farmer.name} with Phone Number : ${farmer.phoneNo} `,
                     createdBy: req.userId
                 })
 
-                await Buyer.findOneAndUpdate({_id:req.userId}, {
-                    $push: { notification: buyerNotification._id }
+                await Buyer.findOneAndUpdate({ _id: req.userId }, {
+                    $push: { notification: buyerNotification._id, myOrderHistory: req.params.id }
                 })
                 await BuyerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    isActive: true, isBid: false, bidBy: null, boughtFrom : farmerId
+                    isActive: true, isBid: false, bidBy: null, boughtFrom: farmerId
                 })
 
                 await farmerNotification.save();
@@ -456,6 +469,28 @@ const buyerCtrl = {
             }
         } catch (err) {
             return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    //////////////////////////////////  BUYER ORDER HISTORY  ///////////////////////////
+
+    getMyOrderHistory : async (req,res)=>{
+        try {
+            const orderHistory = await Buyer.findOne({_id:req.userId}).select("myOrderHistory -_id");
+            res.json(orderHistory)
+           
+        } catch (err) {
+            return res.status(500).json({msg:err.message})
+        }
+    },
+
+    getFarmerOrderHistory : async (req,res)=>{
+        try {
+           const Order = await FarmerOrder.find({boughtBy : req.userId});
+           res.json(Order);
+           
+        } catch (err) {
+            return res.status(500).json({msg:err.message})
         }
     }
 

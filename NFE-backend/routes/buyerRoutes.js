@@ -25,4 +25,7 @@ module.exports = function (app){
     app.put('/buyer/order/:id',auth,buyerCtrl.agreeFarmerOrder);
     app.get('/buyer/order/:id',auth,buyerCtrl.reject_FarmerBid);
     app.post('/buyer/order/:id',auth,buyerCtrl.accept_FarmerBid);
+
+    app.get('/buyer/myhistory',auth,buyerCtrl.getMyOrderHistory);
+    app.get('/buyer/history',auth,buyerCtrl.getFarmerOrderHistory);
 }

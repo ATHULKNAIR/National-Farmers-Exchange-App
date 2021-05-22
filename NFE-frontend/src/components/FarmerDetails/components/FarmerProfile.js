@@ -13,7 +13,7 @@ const FarmerProfile = ()=>{
           (response) => { 
             const farmer = response.data 
             setFarmer(farmer); 
-              console.log(farmer.order[0].isActive)   
+              console.log(farmer) 
           },
           (error) => {
             const _farmer =
@@ -62,9 +62,9 @@ const FarmerProfile = ()=>{
             
             
       <strong>Order:</strong>
-      <ul>
+      <ul> 
 
-        {farmer.order &&
+         {farmer.order &&
           farmer.order.map((orders, index) => 
           <li key={index}>Posted On : {orders.postedDate}
                   <br/>Product :{orders.product} 

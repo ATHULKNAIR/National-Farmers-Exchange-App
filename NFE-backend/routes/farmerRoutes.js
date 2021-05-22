@@ -24,4 +24,7 @@ module.exports = function (app){
     app.put('/farmer/order/:id',auth,farmerCtrl.agreeBuyerOrder);
     app.get('/farmer/order/:id',auth,farmerCtrl.bid_BuyerOerder);
     app.get('/farmer/notification',auth,farmerCtrl.getNotification);
+
+    app.get('/farmer/myhistory',auth,farmerCtrl.getMyOrderHistory);
+    app.get('/farmer/history',auth,farmerCtrl.getBuyerOrderHistory);
 }

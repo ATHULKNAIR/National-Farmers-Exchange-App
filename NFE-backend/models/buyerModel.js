@@ -36,7 +36,7 @@ const buyerSchema = new mongoose.Schema({
     },
     role: {
         type: Number,
-        default: 2
+        default: 2  
     },
     order: [{
         type: ObjectId,
@@ -53,7 +53,7 @@ const buyerSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "BuyerOrder"
     }],
-    buyerOrderHistory: [{
+    agreedOrderHistory: [{
         type: ObjectId,
         ref: "FarmerOrder"
     }]
