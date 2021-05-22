@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import { getBuyerHome } from '../services/buyerService';
+import { useDispatch } from "react-redux";
+
+import { buyerLogout } from '../actions/auth'
+import Header from '../../Header/Header';
+import '../../Header/Header.css';
+import { Link } from "react-router-dom";
 
 const BuyerHome = () => {
+    const dispatch = useDispatch()
+
     const [farmerOrder, setFarmerOrder] = useState("");
     useEffect(() => {
         getBuyerHome().then(
@@ -23,9 +31,14 @@ const BuyerHome = () => {
             }
         );
     }, []);
+    const BLogOut = () => {
+        dispatch(buyerLogout());
+    }
 
     return (
         <div className="container">
+            <Header route={'/buyer/login'} LogOut={BLogOut} />
+
             <ul>
 
                 {farmerOrder &&
@@ -41,6 +54,9 @@ const BuyerHome = () => {
                             <br />Name:{orders.createdBy.name}
                             <br />Location:{orders.createdBy.location}
                             <br />Gender:{orders.createdBy.gender}
+                            <div className="row">
+                                <Link to={`/buyer/agreeorder`}>Agree Order</Link>
+                            </div>
                         </li>
                     )}
             </ul>

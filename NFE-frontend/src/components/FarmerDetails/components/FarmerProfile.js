@@ -63,7 +63,7 @@ const FarmerProfile = () => {
            
             
             
-      {/* <strong>Order:</strong>
+      <strong>Order:</strong>
       <ul> 
 
          {farmer.order &&
@@ -76,7 +76,7 @@ const FarmerProfile = () => {
                   <br/>isActive :{JSON.stringify  (orders.isActive)} 
                   <br/>Due Date : {orders.dueDate}<br/><br/>
           </li>)}
-      </ul> */}
+      </ul>
 
       {/* <div className="fluid jumbotron container emp-profile">
         <div className="row">

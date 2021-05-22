@@ -5,12 +5,12 @@ import { Link,Redirect } from 'react-router-dom'
 import Form from "react-validation/build/form";
 
 
-import { agreeBuyerOrder } from '../services/farmerService';
-import { farmerLogout } from '../actions/auth'
+import { agreeFarmerOrder } from '../services/buyerService';
+import { buyerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
-const FarmerAgreeOrder = (props) => {
+const BuyerAgreeOrder = (props) => {
     const dispatch = useDispatch()
 
     
@@ -23,10 +23,10 @@ const FarmerAgreeOrder = (props) => {
 
         setSuccessful(false);
         if (checkBtn.current.context._errors.length === 0) {
-            agreeBuyerOrder()
+            agreeFarmerOrder()
                 .then(() => {
                     setSuccessful(true);
-                    props.history.push('/farmer/notification');
+                    props.history.push('/buyer/notification');
                     window.location.href.reload();
 
                 })
@@ -35,17 +35,17 @@ const FarmerAgreeOrder = (props) => {
                 });
         }
         if (successful) {
-            return <Redirect to="/farmer/notification" />
+            return <Redirect to="/buyer/notification" />
         }
 
     }
-    const FLogOut = () => {
-        dispatch(farmerLogout());
+    const BLogOut = () => {
+        dispatch(buyerLogout());
     }
 
     return (
         <div className="container">
-            <Header route={'/farmer/login'} LogOut={FLogOut} />
+            <Header route={'/buyer/login'} LogOut={BLogOut} />
             <div>
                 <Form onSubmit={handleSubmit} ref={form}>
                     <div className="form-group">
@@ -53,7 +53,7 @@ const FarmerAgreeOrder = (props) => {
                     </div>
                 </Form>
                 <div className="row">
-                    <Link to={`/farmer/home`}>Cancel Order</Link>
+                    <Link to={`/buyer/home`}>Cancel Order</Link>
                 </div>
             </div>
 
@@ -61,4 +61,4 @@ const FarmerAgreeOrder = (props) => {
     );
 }
 
-export default FarmerAgreeOrder;
+export default BuyerAgreeOrder;

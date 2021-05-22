@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom'
+
 
 import {buyerLogout} from '../actions/auth'
 import {getBuyerProfile} from '../services/buyerService';
@@ -67,7 +69,7 @@ const BuyerProfile = ()=>{
             </p>
             
             
-      <strong>Order:</strong>
+      {/* <strong>Order:</strong>
       <ul>
 
         {buyer.order &&
@@ -80,7 +82,11 @@ const BuyerProfile = ()=>{
                   <br/>isActive :{JSON.stringify  (orders.isActive)}
                   <br/>Due Date : {orders.dueDate}<br/><br/>
           </li>)}
-      </ul>
+      </ul> */}
+        <div className="row">
+                    
+                    <Link to="/buyer/editprofile">Edit Profile</Link>
+                </div>
         </div>
       );
 }

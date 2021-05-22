@@ -36,9 +36,9 @@ import {
           });
   };
 
-  export const buyerLogin = (email,password)=>(dispatch)=>{
+  export const buyerLogin = (phoneNo,password)=>(dispatch)=>{
 
-    return AuthService.login(email,password)
+    return AuthService.login(phoneNo,password)
       .then((data)=>{
           dispatch({
               type : LOGIN_SUCCESS,

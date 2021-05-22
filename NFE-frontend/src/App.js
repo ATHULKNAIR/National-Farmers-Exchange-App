@@ -2,21 +2,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 import {BrowserRouter as Router ,Switch ,Route} from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
 
 import {history} from './components/helpers/history';
 import Home from './components/Home/Home';
 import AboutUs from './components/AboutUs/AboutUs';
 import Contract from './components/ContractFarm/Contract';
 import Bidding from './components/Bidding/Bidding';
-import Products from './components/Products/Product.js';
 import PriceBoard from './components/PriceBoard/PriceBoard';
-import Notifications from './components/Notifications/Notifications.js';
-import Profile from './components/Profile/FarmerProfile';
+
 
 import FarmerRegsiter from './components/FarmerDetails/components/FarmerRegister';
 import BuyerRegsiter from './components/BuyerDetails/components/BuyerRegister';
@@ -34,18 +29,27 @@ import FarmerCreateOrder from './components/FarmerDetails/components/FarmerCreat
 import BuyerCreateOrder from './components/BuyerDetails/components/BuyerCreateOrder';
 
 import FarmerEditProfile from './components/FarmerDetails/components/FarmerEditProfile';
+import BuyerEditProfile from './components/BuyerDetails/components/BuyerEditProfile';
 
 import FarmerOrder from './components/FarmerDetails/components/FarmerOrder';
+import BuyerOrder from './components/BuyerDetails/components/BuyerOrder';
 
 import UpdateFarmerOrder from './components/FarmerDetails/components/UpdateFarmerOrder';
+import UpdateBuyerOrder from './components/BuyerDetails/components/UpdateBuyerOrder';
 
 import FarmerAgreeOrder from './components/FarmerDetails/components/FarmerAgreeOrder';
+import BuyerAgreeOrder from './components/BuyerDetails/components/BuyerAgreeOrder';
 
 import FarmerHistory from './components/FarmerDetails/components/FarmerHistory';
+import BuyerHistory from './components/BuyerDetails/components/BuyerHistory';
+
 import FarmerOrderHistory from './components/FarmerDetails/components/FarmerOrderHistory';
+import BuyerOrderHistory from './components/BuyerDetails/components/BuyerOrderHistory';
+
+import FarmerNotification from "./components/FarmerDetails/components/FarmerNotification";
+import BuyerNotification from "./components/BuyerDetails/components/BuyerNotification";
 
 import {clearMessage} from './components/BuyerDetails/actions/messages'
-import FarmerNotification from "./components/FarmerDetails/components/FarmerNotification";
 
 
 function App() {
@@ -103,25 +107,31 @@ function App() {
             <Route  path='/farmer/profile' component={FarmerProfile}/>
 
             <Route  path='/farmer/editprofile' component={FarmerEditProfile}/>
+            <Route  path='/buyer/editprofile' component={BuyerEditProfile}/>
 
             <Route  path='/buyer/home' component={BuyerHome}/>
             <Route  path='/farmer/home' component={FarmerHome}/>
 
             <Route  path='/farmer/order' component={FarmerOrder}/>
+            <Route  path='/buyer/order' component={BuyerOrder}/>
 
             <Route  path='/farmer/createorder' component={FarmerCreateOrder}/>
             <Route  path='/buyer/createorder' component={BuyerCreateOrder}/>
 
             <Route  path='/farmer/updateorder' component={UpdateFarmerOrder}/>
+            <Route  path='/buyer/updateorder' component={UpdateBuyerOrder}/>
             
             <Route  path='/farmer/agreeorder' component={FarmerAgreeOrder}/>
-
-
+            <Route  path='/buyer/agreeorder' component={BuyerAgreeOrder}/>
             
             <Route  path='/farmer/notification' component={FarmerNotification}/>
+            <Route  path='/buyer/notification' component={BuyerNotification}/>
            
             <Route  path='/farmer/history' component={FarmerHistory}/>
+            <Route  path='/buyer/history' component={BuyerHistory}/>
+            
             <Route  path='/farmer/myhistory' component={FarmerOrderHistory}/>
+            <Route  path='/buyer/myhistory' component={BuyerOrderHistory}/>
 
 
 
@@ -129,9 +139,6 @@ function App() {
             <Route  path='/contracts' component={Contract}/>
             <Route  path='/priceboard' component={PriceBoard}/>
             <Route  path='/bids' component={Bidding}/>
-            <Route  path='/products' component={Products}/>
-            
-            <Route  path='/notifications' component={Notifications}/>
             
           </Switch>
         </div>

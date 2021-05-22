@@ -1,11 +1,18 @@
 import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import {Redirect} from 'react-router-dom';
-import {createBuyerOrder} from '../services/buyerService';
 
-const BuyerCreateOrder =()=>{
+import {buyerLogout} from '../actions/auth'
+import {createBuyerOrder} from '../services/buyerService';
+import Header from '../../Header/Header';
+import '../../Header/Header.css';
+
+const BuyerCreateOrder =(props)=>{
+  const dispatch = useDispatch()
 
     const form = useRef();
     const checkBtn = useRef();
@@ -15,6 +22,8 @@ const BuyerCreateOrder =()=>{
     const [baseRate,setBaseRate] = useState("");
     const [dueDate,setDueDate] = useState("");
     const [successful, setSuccessful] = useState(false);
+
+  const { message } = useSelector(state => state.message);
 
 
     const onChangeProduct = (e)=>{
@@ -42,6 +51,8 @@ const BuyerCreateOrder =()=>{
             createBuyerOrder(product, quantity, baseRate,dueDate)
               .then(() => {
                 setSuccessful(true);
+                props.history.push('/buyer/order');
+          window.location.href.reload();
 
               })
               .catch(() => {
@@ -49,25 +60,16 @@ const BuyerCreateOrder =()=>{
               });
         }
         if(successful){
-            return <Redirect to="farmer/profile"/>
+            return <Redirect to="buyer/profile"/>
         }
 
     }
-    // useEffect(()=>{
-    //     createBuyerOrder().then(
-    //         (response)=>{
-    //             setContent(response.data);
-    //         },
-    //         (error)=>{
-    //             const _content =(error.response && error.response.data &&
-    //                             error.response.data.message) || 
-    //                             error.message || error.toString();
-    //             setContent(_content);
-    //         }
-    //     )
-    // },[]);
+    const BLogOut = () => {
+      dispatch(buyerLogout());
+    }
     return (
         <div >
+          <Header route={'/buyer/login'} LogOut={BLogOut} />
            <Form onSubmit={handleSubmit} ref={form}>
                   {!successful && (
                     <div>
@@ -106,13 +108,13 @@ const BuyerCreateOrder =()=>{
                     </div>
                   )}
 
-                  {/* {message && (
+                  {message && (
                     <div className="form-group">
                     <div className={ successful ? "alert alert-success" : "alert alert-danger" } role="alert">
                         {message}
                     </div>
                     </div>
-                )} */}
+                )}
                 <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
         </div>

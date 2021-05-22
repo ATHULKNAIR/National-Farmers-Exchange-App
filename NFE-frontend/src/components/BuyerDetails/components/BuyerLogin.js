@@ -28,7 +28,7 @@ const BuyerLogin = (props)=>{
     const form = useRef();
     const checkBtn = useRef();
     
-    const [email ,setEmail] = useState('');
+    const [phoneNo ,setPhone] = useState('');
     const [password ,setPassword] = useState('');
     const [loading ,setLoading] = useState(false);
 
@@ -37,9 +37,9 @@ const BuyerLogin = (props)=>{
 
     const dispatch = useDispatch();
 
-    const onChangeEmail = (e)=>{
-        const email = e.target.value;
-        setEmail(email);
+    const onChangePhone = (e)=>{
+        const phoneNo = e.target.value;
+        setPhone(phoneNo);
     }
 
     const onChangePassword = (e)=>{
@@ -54,7 +54,7 @@ const BuyerLogin = (props)=>{
         form.current.validateAll();
 
         if(checkBtn.current.context._errors.length === 0){
-            dispatch(buyerLogin(email,password))
+            dispatch(buyerLogin(phoneNo,password))
               .then(()=>{
                   props.history.push('/buyer/profile');
                   window.location.href.reload();
@@ -89,12 +89,12 @@ const BuyerLogin = (props)=>{
                      className="profile-img-card" />
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
-                        <label htmlFor="name">Email Address</label>
-                        <Input type="text" className="form-control" name="email" value={email} 
-                               onChange={onChangeEmail} validations={[required]} />
+                        <label htmlFor="name">Phone No :</label>
+                        <Input type="text" className="form-control" name="phoneNo" value={phoneNo} 
+                               onChange={onChangePhone} validations={[required]} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password :</label>
                         <Input type="password" className="form-control" name="password"
                                value={password} onChange={onChangePassword} validations={[required]} />
                     </div>

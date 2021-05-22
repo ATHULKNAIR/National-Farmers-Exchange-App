@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import { getFarmerHome } from '../services/farmerService';
 import { useDispatch } from "react-redux";
 
-import {farmerLogout} from '../actions/auth'
+import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 import { Link } from "react-router-dom";
 
 const FarmerHome = () => {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const [buyerOrder, setBuyerOrder] = useState("");
     useEffect(() => {
@@ -33,11 +33,11 @@ const FarmerHome = () => {
     }, []);
     const FLogOut = () => {
         dispatch(farmerLogout());
-      }
+    }
 
     return (
         <div className="container">
-          <Header route={'/farmer/login'} LogOut={FLogOut} />
+            <Header route={'/farmer/login'} LogOut={FLogOut} />
 
             <ul>
 
@@ -55,19 +55,11 @@ const FarmerHome = () => {
                             <br />Location:{orders.createdBy.location}
                             <br />Gender:{orders.createdBy.gender}
                             <div className="row">
-                                    <Link to={`/farmer/agreeorder`}>Agree Order</Link>
+                                <Link to={`/farmer/agreeorder`}>Agree Order</Link>
                             </div>
-
                         </li>
                     )}
-
-
             </ul>
-
-
-
-
-
         </div>
     );
 }

@@ -2,9 +2,9 @@ import axios from 'axios';
 
 class AuthService {
 
-    login(email,password){
+    login(phoneNo,password){
         return axios.post('http://localhost:5000/buyer/login',{
-            email,password
+            phoneNo,password
         })
         .then(res=>{
             if(res.data.accessToken){
