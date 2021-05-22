@@ -46,6 +46,14 @@ const farmerSchema = new mongoose.Schema({
         type : ObjectId,
         ref : "FarmerNotif"
     }],
+    myOrderHistory : [{
+        type: ObjectId,
+        ref : "FarmerOrder"
+    }],
+    buyerOrderHistory :[{
+        type: ObjectId,
+        ref : "BuyerOrder"
+    }]
    
    
 
