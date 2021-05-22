@@ -6,13 +6,13 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import { createFarmerOrder } from '../services/farmerService';
+import {updateFarmerOrder } from '../services/farmerService';
 import {farmerLogout} from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
 
-const FarmerCreateOrder = (props) => {
+const UpdateFarmerOrder = (props) => {
   const dispatch = useDispatch()
 
   const form = useRef();
@@ -48,10 +48,10 @@ const FarmerCreateOrder = (props) => {
     setSuccessful(false);
 
     if (checkBtn.current.context._errors.length === 0) {
-      createFarmerOrder(product, quantity, baseRate, dueDate)
+     updateFarmerOrder(product, quantity, baseRate, dueDate)
         .then(() => {
           setSuccessful(true);
-          props.history.push('/farmer/order');
+          props.history.push('/farmer/profile');
           window.location.href.reload();
         })
         .catch(() => {
@@ -59,7 +59,7 @@ const FarmerCreateOrder = (props) => {
         });
     }
     if (successful) {
-      return <Redirect to="farmer/profile" />
+      return <Redirect to="/farmer/order" />
     }
 
   }
@@ -72,33 +72,33 @@ const FarmerCreateOrder = (props) => {
       
           <Header route={'/farmer/login'} LogOut={FLogOut} />
            
-            <Form onSubmit={handleSubmit} ref={form}>
+            <Form onSubmit={handleSubmit}  ref={form}>
         {!successful && (
           <div>
 
             <div className="form-group">
-              <label htmlFor="product">Product</label>
+              <label htmlFor="product">Change Product</label>
               <Input type="text" className="form-control" name="product" value={product}
                 onChange={onChangeProduct}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="quantity">Quantity in Kg</label>
+              <label htmlFor="quantity"> Change Quantity</label>
               <Input type="text" className="form-control" name="quantity" value={quantity}
                 onChange={onChangeQuantity}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="baseRate">Base Price / Kg</label>
+              <label htmlFor="baseRate">Change Base Rate</label>
               <Input type="text" className="form-control" name="baseRate"
                 value={baseRate} onChange={onChangeBaseRate}
 
               />
             </div>
             <div className="form-group">
-              <label htmlFor="dueDate">Due Date</label>
+              <label htmlFor="dueDate"> Change DueDate</label>
               <Input type="text" className="form-control" name="dueDate"
                 value={dueDate} onChange={onChangeDueDate}
 
@@ -106,7 +106,7 @@ const FarmerCreateOrder = (props) => {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-primary btn-block">Publish</button>
+              <button className="btn btn-primary btn-block">Save Changes</button>
             </div>
           </div>
         )}
@@ -124,4 +124,4 @@ const FarmerCreateOrder = (props) => {
   )
 }
 
-export default FarmerCreateOrder;
+export default UpdateFarmerOrder;

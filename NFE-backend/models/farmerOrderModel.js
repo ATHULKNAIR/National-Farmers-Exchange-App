@@ -35,6 +35,9 @@ const farmerOrderSchema = new mongoose.Schema({
         type : Boolean,
         default : true
     },
+    agreedDate :{
+        type : Date
+    }
    
 })
 

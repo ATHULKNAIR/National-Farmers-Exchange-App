@@ -365,7 +365,7 @@ const buyerCtrl = {
                     $push: { notification: buyerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 await FarmerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    boughtBy: req.userId, isActive: false
+                    boughtBy: req.userId, isActive: false , agreedDate : Date.now()
                 })
 
                 let farmerNotification = new FarmerNotification({

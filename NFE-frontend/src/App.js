@@ -33,10 +33,19 @@ import BuyerHome from './components/BuyerDetails/components/BuyerHome';
 import FarmerCreateOrder from './components/FarmerDetails/components/FarmerCreateOrder';
 import BuyerCreateOrder from './components/BuyerDetails/components/BuyerCreateOrder';
 
-// import {farmerLogout} from './components/FarmerDetails/actions/auth'
-// import {buyerLogout} from './components/BuyerDetails/actions/auth'
+import FarmerEditProfile from './components/FarmerDetails/components/FarmerEditProfile';
+
+import FarmerOrder from './components/FarmerDetails/components/FarmerOrder';
+
+import UpdateFarmerOrder from './components/FarmerDetails/components/UpdateFarmerOrder';
+
+import FarmerAgreeOrder from './components/FarmerDetails/components/FarmerAgreeOrder';
+
+import FarmerHistory from './components/FarmerDetails/components/FarmerHistory';
+import FarmerOrderHistory from './components/FarmerDetails/components/FarmerOrderHistory';
 
 import {clearMessage} from './components/BuyerDetails/actions/messages'
+import FarmerNotification from "./components/FarmerDetails/components/FarmerNotification";
 
 
 function App() {
@@ -86,14 +95,34 @@ function App() {
             <Route exact path='/' component={Home}/>
             <Route exact path='/farmer/login' component={FarmerLogin}/>
             <Route exact path='/buyer/login' component={BuyerLogin}/>
+
             <Route exact path='/farmer/register' component={FarmerRegsiter}/>
             <Route exact path='/buyer/register' component={BuyerRegsiter}/>
+
             <Route  path='/buyer/profile' component={BuyerProfile}/>
             <Route  path='/farmer/profile' component={FarmerProfile}/>
+
+            <Route  path='/farmer/editprofile' component={FarmerEditProfile}/>
+
             <Route  path='/buyer/home' component={BuyerHome}/>
             <Route  path='/farmer/home' component={FarmerHome}/>
-            <Route  path='/farmer/order' component={FarmerCreateOrder}/>
-            <Route  path='/buyer/order' component={BuyerCreateOrder}/>
+
+            <Route  path='/farmer/order' component={FarmerOrder}/>
+
+            <Route  path='/farmer/createorder' component={FarmerCreateOrder}/>
+            <Route  path='/buyer/createorder' component={BuyerCreateOrder}/>
+
+            <Route  path='/farmer/updateorder' component={UpdateFarmerOrder}/>
+            
+            <Route  path='/farmer/agreeorder' component={FarmerAgreeOrder}/>
+
+
+            
+            <Route  path='/farmer/notification' component={FarmerNotification}/>
+           
+            <Route  path='/farmer/history' component={FarmerHistory}/>
+            <Route  path='/farmer/myhistory' component={FarmerOrderHistory}/>
+
 
 
             <Route  path='/aboutus' component={AboutUs}/>

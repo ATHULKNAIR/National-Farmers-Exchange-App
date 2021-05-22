@@ -124,7 +124,7 @@ const farmerCtrl = {
                 location: farmer.location,
                 gender: farmer.gender,
                 notification: farmer.notification,
-                product : farmer.product
+                product: farmer.product
 
             });
 
@@ -148,7 +148,7 @@ const farmerCtrl = {
 
     editFarmer: async (req, res) => {
         try {
-            const { photo, name, phoneNo,location,product } = req.body;
+            const { photo, name, phoneNo, location, product } = req.body;
             const fieldsToUpdate = {};
             if (photo) fieldsToUpdate.photo = photo;
             if (name) fieldsToUpdate.name = name;
@@ -186,14 +186,16 @@ const farmerCtrl = {
             const buyer = await Buyer.find().where('product').in(farmer.product).exec();
 
             const orderId = buyer.map((user) => user.order).flat();
-
+            
+            
             const Order = await BuyerOrder.find({ _id: orderId, isActive: true })
                 .populate({ path: "createdBy", select: "photo name location gender" })
                 .sort("postedDate")
                 .lean()
                 .exec();
-
-            res.json(Order)
+            
+                res.json(Order)
+           
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -249,7 +251,7 @@ const farmerCtrl = {
     getMyOrders: async (req, res) => {
         try {
             const order = await FarmerOrder.find({ createdBy: req.userId })
-                .sort("-baseRate")
+                .sort("-postedDate")
                 .lean()
                 .exec();
             res.send(order);
@@ -265,16 +267,16 @@ const farmerCtrl = {
 
     updateOrder: async (req, res) => {
         try {
-            const { product, quantity, baseRate, dueDate, isActive } = req.body;
+            const { product, quantity, baseRate, dueDate } = req.body;
             const fieldsToUpdate = {};
             if (product) fieldsToUpdate.product = product;
             if (quantity) fieldsToUpdate.quantity = quantity;
             if (baseRate) fieldsToUpdate.baseRate = baseRate;
             if (dueDate) fieldsToUpdate.dueDate = dueDate;
-            if (isActive) fieldsToUpdate.isActive = isActive;
+            // if (isActive) fieldsToUpdate.isActive = isActive;
             const order = await FarmerOrder.findByIdAndUpdate(req.params.id, { $set: { ...fieldsToUpdate } }, {
                 new: true, runValidators: true
-            });
+            }).select("product,quantity,baserate,dueDate");
 
             let notification = new FarmerNotification({
                 message: `Order with id : ${req.params.id} is updated by you`,
@@ -349,11 +351,11 @@ const farmerCtrl = {
                 })
                 await farmerNotification.save();
 
-                await Farmer.findByIdAndUpdate({_id:req.userId}, {
-                    $push: { notification: farmerNotification._id,agreedOrderHistory : req.params.id }
+                await Farmer.findByIdAndUpdate({ _id: req.userId }, {
+                    $push: { notification: farmerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 await BuyerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    boughtFrom: req.userId, isActive: false
+                    boughtFrom: req.userId, isActive: false,agreedDate : Date.now()
                 })
 
                 let buyerNotification = new BuyerNotification({
@@ -363,7 +365,7 @@ const farmerCtrl = {
 
                 await buyerNotification.save();
                 await Buyer.findOneAndUpdate({ _id: buyer }, {
-                    $push: { notification: buyerNotification._id, myOrderHistory : req.params.id }
+                    $push: { notification: buyerNotification._id, myOrderHistory: req.params.id }
                 })
                 res.json("Agreed to this Offer")
             } else {
@@ -388,30 +390,32 @@ const farmerCtrl = {
             // const FarmerPhone = farmer.phoneNo
             // const FarmerName = farmer.name
 
+         
+
             if (Active) {
                 let farmerNotification = new FarmerNotification({
                     message: `You asked for a bid to Order id : ${req.params.id} . `,
                     createdBy: req.userId
                 })
-               
-                await Farmer.findByIdAndUpdate({_id:req.userId}, {
+
+                await Farmer.findByIdAndUpdate({ _id: req.userId }, {
                     $push: { notification: farmerNotification._id }
                 })
                 let buyerNotification = new BuyerNotification({
-                    message: `Your Order with id : ${req.params.id} is kept for a BID by ${req.userId}`,
+                    message: `Your Order with id : ${req.params.id} is asked for increasing  Rs.${order.bidAmount} by ${req.userId}`,
                     createdBy: buyer
                 })
-                
+
                 await Buyer.findOneAndUpdate({ _id: buyer }, {
                     $push: { notification: buyerNotification._id },
                 })
                 await BuyerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    bidBy : req.userId, isBid : true,isActive: false
+                    bidBy: req.userId, isBid: true, isActive: false
                 })
                 await farmerNotification.save();
                 await buyerNotification.save();
                 res.json("Bidding Successfull")
-            }else{
+            } else {
                 return res.send("Bidding Failed")
             }
         } catch (err) {
@@ -419,23 +423,25 @@ const farmerCtrl = {
         }
     },
 
-    getMyOrderHistory : async (req,res)=>{
+    getMyOrderHistory: async (req, res) => {
         try {
-            const orderHistory = await Farmer.findOne({_id:req.userId}).select("myOrderHistory -_id");
+            const orderHistory = await FarmerOrder.find({ createdBy: req.userId,isActive : false })
+            .populate({path:"boughtBy",select:"name photo location phoneNo"});
             res.json(orderHistory)
-           
+
         } catch (err) {
-            return res.status(500).json({msg:err.message})
+            return res.status(500).json({ msg: err.message })
         }
     },
 
-    getBuyerOrderHistory : async (req,res)=>{
+    getBuyerOrderHistory: async (req, res) => {
         try {
-           const Order = await BuyerOrder.find({boughtFrom : req.userId});
-           res.json(Order);
-           
+            const Order = await BuyerOrder.find({ boughtFrom: req.userId }).
+            populate({path:"createdBy",select:"name photo location phoneNo"});
+            res.json(Order);
+
         } catch (err) {
-            return res.status(500).json({msg:err.message})
+            return res.status(500).json({ msg: err.message })
         }
     }
 

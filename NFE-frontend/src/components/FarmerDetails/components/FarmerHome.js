@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {farmerLogout} from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
+import { Link } from "react-router-dom";
 
 const FarmerHome = () => {
   const dispatch = useDispatch()
@@ -53,7 +54,9 @@ const FarmerHome = () => {
                             <br />Name:{orders.createdBy.name}
                             <br />Location:{orders.createdBy.location}
                             <br />Gender:{orders.createdBy.gender}
-
+                            <div className="row">
+                                    <Link to={`/farmer/agreeorder`}>Agree Order</Link>
+                            </div>
 
                         </li>
                     )}

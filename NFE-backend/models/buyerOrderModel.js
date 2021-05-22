@@ -44,6 +44,13 @@ const buyerOrderSchema = new mongoose.Schema({
         type : ObjectId,
         ref : "Farmer",
         default : null
+    },
+    bidAmount : {
+        type : Number,
+        default : 1
+    },
+    adreedDate :{
+        type :Date
     }
    
 })
