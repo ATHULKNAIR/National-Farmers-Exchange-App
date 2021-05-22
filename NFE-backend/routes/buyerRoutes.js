@@ -14,7 +14,7 @@ module.exports = function (app){
     app.post("/buyer/register",buyerCtrl.register);
     app.post("/buyer/login",buyerCtrl.login);
     app.get("/buyer/profile",auth,buyerCtrl.getBuyerInfor);
-    app.patch("/buyer/profile/edit",auth,buyerCtrl.editBuyer);
+    app.patch("/buyer/editprofile",auth,buyerCtrl.editBuyer);
     app.get("/buyer/profile/all",auth,buyerAdmin,buyerCtrl.getUsersAllInfor);
     app.get('/buyer/home',auth,buyerCtrl.buyerHome);
     app.post('/buyer/order',auth,buyerCtrl.createOrder);

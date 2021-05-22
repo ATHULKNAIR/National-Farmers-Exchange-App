@@ -14,7 +14,7 @@ module.exports = function (app){
     app.post("/farmer/register",farmerCtrl.register);
     app.post("/farmer/login",farmerCtrl.login);
     app.get("/farmer/profile",auth,farmerCtrl.getFarmerInfor);
-    app.patch("/farmer/profile/edit",auth,farmerCtrl.editFarmer);
+    app.patch("/farmer/editprofile",auth,farmerCtrl.editFarmer);
     app.get("/farmer/profile/all",auth,farmerAdmin,farmerCtrl.getUsersAllInfor);
     app.get('/farmer/home',auth,farmerCtrl.farmerHome);
     app.post('/farmer/order',auth,farmerCtrl.createOrder);
@@ -22,7 +22,7 @@ module.exports = function (app){
     app.delete('/farmer/order/:id',auth,farmerCtrl.deletOrder);
     app.patch('/farmer/order/:id',auth,farmerCtrl.updateOrder);
     app.put('/farmer/order/:id',auth,farmerCtrl.agreeBuyerOrder);
-    app.get('/farmer/order/:id',auth,farmerCtrl.bid_BuyerOerder);
+    app.get('/farmer/order/:id',auth,farmerCtrl.bid_BuyerOrder);
     app.get('/farmer/notification',auth,farmerCtrl.getNotification);
 
     app.get('/farmer/myhistory',auth,farmerCtrl.getMyOrderHistory);

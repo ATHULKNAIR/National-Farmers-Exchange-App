@@ -155,16 +155,18 @@ const buyerCtrl = {
 
     editBuyer: async (req, res) => {
         try {
-            const { photo, name, email, phoneNo } = req.body;
+            const { photo, name, email,phoneNo,location,product } = req.body;
             const fieldsToUpdate = {};
             if (photo) fieldsToUpdate.photo = photo;
             if (name) fieldsToUpdate.name = name;
             if (email) fieldsToUpdate.email = email;
             if (phoneNo) fieldsToUpdate.phoneNo = phoneNo;
+            if (location) fieldsToUpdate.location = location;
+            if (product) fieldsToUpdate.product = product;
             const buyer = await Buyer.findByIdAndUpdate(req.userId, { $set: { ...fieldsToUpdate } }, {
                 new: true, runValidators: true
             })
-                .select("photo name email phoneNo");
+                .select("photo name email phoneNo location product");
             res.status(200).json({ success: true, data: buyer });
         } catch (err) {
             return res.status(500).json({ msg: err.message });

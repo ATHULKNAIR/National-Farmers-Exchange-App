@@ -148,15 +148,17 @@ const farmerCtrl = {
 
     editFarmer: async (req, res) => {
         try {
-            const { photo, name, phoneNo } = req.body;
+            const { photo, name, phoneNo,location,product } = req.body;
             const fieldsToUpdate = {};
             if (photo) fieldsToUpdate.photo = photo;
             if (name) fieldsToUpdate.name = name;
             if (phoneNo) fieldsToUpdate.phoneNo = phoneNo;
+            if (location) fieldsToUpdate.location = location;
+            if (product) fieldsToUpdate.product = product;
             const farmer = await Farmer.findByIdAndUpdate(req.userId, { $set: { ...fieldsToUpdate } }, {
                 new: true, runValidators: true
             })
-                .select("photo name phoneNo");
+                .select("photo name phoneNo location product");
             res.status(200).json({ success: true, data: farmer });
         } catch (err) {
             return res.status(500).json({ msg: err.message });
@@ -372,7 +374,7 @@ const farmerCtrl = {
         }
     },
 
-    bid_BuyerOerder: async (req, res) => {
+    bid_BuyerOrder: async (req, res) => {
         try {
 
             const order = await BuyerOrder.findOne({ _id: req.params.id }).select()
