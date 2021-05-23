@@ -49,7 +49,7 @@ const UpdateBuyerOrder = ({match,history}) => {
     setSuccessful(false);
 
     if (checkBtn.current.context._errors.length === 0) {
-     updateBuyerOrder(product, quantity, baseRate, dueDate)
+     updateBuyerOrder(id,product, quantity, baseRate, dueDate)
         .then(() => {
           setSuccessful(true);
           history.push('/buyer/order');

@@ -55,7 +55,7 @@ const BuyerHome = () => {
                             <br />Location:{orders.createdBy.location}
                             <br />Gender:{orders.createdBy.gender}
                             <div className="row">
-                                <Link to={`/buyer/agreeorder`}>Agree Order</Link>
+                                <Link to={`/buyer/agreeorder/${orders._id}`}>Agree Order</Link>
                             </div>
                         </li>
                     )}

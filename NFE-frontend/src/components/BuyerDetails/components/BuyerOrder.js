@@ -59,10 +59,11 @@ const BuyerOrder = () => {
                          </div>
 )
                                } 
-                                
+                                {orders.isActive == true &&
                                 <div className="row">
-                                    <Link to={`/buyer/updateorder`}>Edit Order</Link>
-                                </div>
+                                <Link to={`/buyer/updateorder/${orders._id}`}>Edit Order</Link>
+                            </div>}
+                                
                                 <br />
                             </li>)}
 

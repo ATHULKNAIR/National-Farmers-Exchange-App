@@ -41,8 +41,8 @@ const BuyerOrderHistory = () => {
                 <strong>History:</strong>
                 <ul>
 
-                    {history &&
-                        history.map((orders, index) =>
+                    {history.length>0 &&
+                        history?.map((orders, index) =>
                             <li key={index}>
                                 <div>
                 <img src={orders.boughtBy.photo} alt="Profile Pic"

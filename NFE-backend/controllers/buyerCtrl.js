@@ -478,7 +478,8 @@ const buyerCtrl = {
 
     getMyOrderHistory : async (req,res)=>{
         try {
-            const orderHistory = await Buyer.findOne({_id:req.userId}).select("myOrderHistory -_id");
+            const orderHistory = await Buyer.findOne({_id:req.userId}).select("myOrderHistory -_id")
+            .populate({path:"boughtBy",select:"name photo location phoneNo"});
             res.json(orderHistory)
            
         } catch (err) {
@@ -488,7 +489,8 @@ const buyerCtrl = {
 
     getFarmerOrderHistory : async (req,res)=>{
         try {
-           const Order = await FarmerOrder.find({boughtBy : req.userId});
+           const Order = await FarmerOrder.find({boughtBy : req.userId})
+           .populate({path:"createdBy",select:"name photo location phoneNo"});
            res.json(Order);
            
         } catch (err) {
