@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link ,useParams} from 'react-router-dom'
 
 import { getFarmerOrder } from '../services/farmerService';
 import { farmerLogout } from '../actions/auth'
@@ -9,6 +9,7 @@ import '../../Header/Header.css';
 
 const FarmerOrder = () => {
     const dispatch = useDispatch()
+    
     const [order, setOrder] = useState("");
     useEffect(() => {
         getFarmerOrder().then(
@@ -49,10 +50,12 @@ const FarmerOrder = () => {
                                 <br /> Base Price : {orders.baseRate}Rs/Kg
                                 <br />boughtBy :{orders.boughtBy}
                                 <br />isActive :{JSON.stringify(orders.isActive)}
-                                <br />Due Date : {orders.dueDate}<br /><br />
+                                <br />Due Date : {orders.dueDate}<br />
+                              
                                 <div className="row">
-                                    <Link to={`/farmer/updateorder`}>Edit Order</Link>
+                                    <Link to={`/farmer/updateorder/${orders._id}`}>Edit Order</Link>
                                 </div>
+                                <br /><br />
                             </li>)}
 
                 </ul>

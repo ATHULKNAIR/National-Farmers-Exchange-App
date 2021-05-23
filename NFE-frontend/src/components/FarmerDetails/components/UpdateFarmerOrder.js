@@ -12,9 +12,10 @@ import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
 
-const UpdateFarmerOrder = (props) => {
+const UpdateFarmerOrder = ({match,history}) => {
   const dispatch = useDispatch()
 
+const id = match.params.id;
   const form = useRef();
   const checkBtn = useRef();
 
@@ -42,16 +43,18 @@ const UpdateFarmerOrder = (props) => {
     const dueDate = e.target.value;
     setDueDate(dueDate)
   }
+  
+console.log(id)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSuccessful(false);
 
     if (checkBtn.current.context._errors.length === 0) {
-     updateFarmerOrder(product, quantity, baseRate, dueDate)
+     updateFarmerOrder(id,product, quantity, baseRate, dueDate)
         .then(() => {
           setSuccessful(true);
-          props.history.push('/farmer/profile');
+          history.push('/farmer/order');
           window.location.href.reload();
         })
         .catch(() => {

@@ -50,7 +50,8 @@ const buyerOrderSchema = new mongoose.Schema({
         default : 1
     },
     adreedDate :{
-        type :Date
+        type : Date,
+        default:Date.now
     }
    
 })

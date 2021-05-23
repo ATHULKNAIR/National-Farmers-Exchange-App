@@ -49,10 +49,21 @@ const BuyerOrder = () => {
                                 <br /> Base Price : {orders.baseRate}Rs/Kg
                                 <br />boughtBy :{orders.boughtBy}
                                 <br />isActive :{JSON.stringify(orders.isActive)}
-                                <br />Due Date : {orders.dueDate}<br /><br />
+                                <br />Due Date : {orders.dueDate}<br />
+                                {orders.isBid == true &&
+(                              <div className="row">
+                                <Link to={`/buyer/rejectbid/${orders._id}`}>Reject Bid</Link>
+                            <div>
+                             <Link to={`/buyer/acceptbid/${orders._id}`}>Accept Bid</Link>
+                             </div>
+                         </div>
+)
+                               } 
+                                
                                 <div className="row">
                                     <Link to={`/buyer/updateorder`}>Edit Order</Link>
                                 </div>
+                                <br />
                             </li>)}
 
                 </ul>

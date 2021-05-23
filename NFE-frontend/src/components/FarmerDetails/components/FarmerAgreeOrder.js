@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Link,Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import Form from "react-validation/build/form";
 
@@ -10,32 +10,35 @@ import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
-const FarmerAgreeOrder = (props) => {
+const FarmerAgreeOrder = ({ match, history }) => {
     const dispatch = useDispatch()
 
-    
-  const form = useRef();
-  const checkBtn = useRef();
+    const id = match.params.id;
+
+    const form = useRef();
 
     const [successful, setSuccessful] = useState(false);
-
-    const handleSubmit = () => {
-
+    console.log(id)
+    const handleSubmit = (e) => {
+        e.preventDefault();
         setSuccessful(false);
-        if (checkBtn.current.context._errors.length === 0) {
-            agreeBuyerOrder()
+        
+            agreeBuyerOrder(id)
                 .then(() => {
                     setSuccessful(true);
-                    props.history.push('/farmer/notification');
+                    history.push('/farmer/notification');
                     window.location.href.reload();
 
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    
                 });
-        }
+        
         if (successful) {
             return <Redirect to="/farmer/notification" />
+        } else {
+            return <Redirect to="/farmer/home" />
         }
 
     }

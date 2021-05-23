@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const auth = (req,res,next)=>{
 
     const token = req.headers["x-access-token"];
+    console.log(token)
     if(!token){
         return res.status(400).json({msg:"Invalid Authentication"})
     }

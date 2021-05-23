@@ -9,7 +9,8 @@ const buyerNotifSchema = new mongoose.Schema({
     createdBy : {
         type : ObjectId,
         ref: "Buyer"   
-    }
+    },
+    
 },{
     timestamps : true
 })

@@ -26,13 +26,13 @@ const getBuyerOrder = () => {
         headers: buyerAuthHeader()
     });
 }
-const updateBuyerOrder = (product, quantity, baseRate, dueDate) => {
-    return axios.patch('http://localhost:5000/buyer/order/:id', {
+const updateBuyerOrder = (id,product, quantity, baseRate, dueDate) => {
+    return axios.patch(`http://localhost:5000/buyer/order/${id}`, {
         product, quantity, baseRate, dueDate
     }, { headers: buyerAuthHeader() });
 }
-const agreeFarmerOrder = () => {
-    return axios.put('http://localhost:5000/buyer/order/:id', {
+const agreeFarmerOrder = (id) => {
+    return axios.put(`http://localhost:5000/buyer/order/${id}`,{}, {
         headers: buyerAuthHeader()
     });
 }
@@ -51,13 +51,13 @@ const getFarmerOrderHistory = () => {
         headers: buyerAuthHeader()
     });
 }
-const rejectFarmerBid =()=>{
-    return axios.get('http://localhost:5000/buyer/order/:id',{
+const rejectFarmerBid =(id)=>{
+    return axios.get(`http://localhost:5000/buyer/order/${id}`,{
         headers:buyerAuthHeader()
     });
 }
-const acceptFarmerBid = ()=>{
-    return axios.post('http://localhost:5000/buyer/order/:id',{
+const acceptFarmerBid = (id)=>{
+    return axios.post(`http://localhost:5000/buyer/order/${id}`,{},{
         headers:buyerAuthHeader()
     });
 }

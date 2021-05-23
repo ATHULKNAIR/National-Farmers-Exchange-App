@@ -12,8 +12,9 @@ import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
 
-const UpdateBuyerOrder = (props) => {
+const UpdateBuyerOrder = ({match,history}) => {
   const dispatch = useDispatch()
+  const id = match.params.id;
 
   const form = useRef();
   const checkBtn = useRef();
@@ -51,7 +52,7 @@ const UpdateBuyerOrder = (props) => {
      updateBuyerOrder(product, quantity, baseRate, dueDate)
         .then(() => {
           setSuccessful(true);
-          props.history.push('/buyer/profile');
+          history.push('/buyer/order');
           window.location.href.reload();
         })
         .catch(() => {

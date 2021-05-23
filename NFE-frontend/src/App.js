@@ -49,6 +49,10 @@ import BuyerOrderHistory from './components/BuyerDetails/components/BuyerOrderHi
 import FarmerNotification from "./components/FarmerDetails/components/FarmerNotification";
 import BuyerNotification from "./components/BuyerDetails/components/BuyerNotification";
 
+import FarmerBidOrder from "./components/FarmerDetails/components/FarmerBidOrder";
+import BuyerAcceptBid from "./components/BuyerDetails/components/BuyerAcceptBid";
+import BuyerRejectBid from "./components/BuyerDetails/components/BuyerRejectBid";
+
 import {clearMessage} from './components/BuyerDetails/actions/messages'
 
 
@@ -118,11 +122,15 @@ function App() {
             <Route  path='/farmer/createorder' component={FarmerCreateOrder}/>
             <Route  path='/buyer/createorder' component={BuyerCreateOrder}/>
 
-            <Route  path='/farmer/updateorder' component={UpdateFarmerOrder}/>
-            <Route  path='/buyer/updateorder' component={UpdateBuyerOrder}/>
+            <Route  path='/farmer/updateorder/:id' component={UpdateFarmerOrder}/>
+            <Route  path='/buyer/updateorder/:id' component={UpdateBuyerOrder}/>
             
-            <Route  path='/farmer/agreeorder' component={FarmerAgreeOrder}/>
-            <Route  path='/buyer/agreeorder' component={BuyerAgreeOrder}/>
+            <Route  path='/farmer/agreeorder/:id' component={FarmerAgreeOrder}/>
+            <Route  path='/buyer/agreeorder/:id' component={BuyerAgreeOrder}/>
+
+            <Route  path='/farmer/bidorder/:id' component={FarmerBidOrder}/>
+            <Route  path='/buyer/acceptbid/:id' component={BuyerAcceptBid}/>
+            <Route  path='/buyer/rejectbid/:id' component={BuyerRejectBid}/>
             
             <Route  path='/farmer/notification' component={FarmerNotification}/>
             <Route  path='/buyer/notification' component={BuyerNotification}/>

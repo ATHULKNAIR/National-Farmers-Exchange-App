@@ -11,13 +11,13 @@ import { Link } from "react-router-dom";
 const FarmerHome = () => {
     const dispatch = useDispatch()
 
-    const [buyerOrder, setBuyerOrder] = useState("");
+    const [buyerOrder, setBuyerOrder] = useState([]);
     useEffect(() => {
         getFarmerHome().then(
             (response) => {
                 const buyerOrder = response.data
                 setBuyerOrder(buyerOrder);
-                console.log(buyerOrder[0].createdBy.photo)
+                // console.log(buyerOrder[0].createdBy.photo)
             },
             (error) => {
                 const _order =
@@ -41,8 +41,8 @@ const FarmerHome = () => {
 
             <ul>
 
-                {buyerOrder &&
-                    buyerOrder.map((orders, index) =>
+                { buyerOrder?.length>0 &&
+                    buyerOrder?.map((orders, index) =>
                         <li key={index}>
                             <img src={orders.createdBy.photo} className="profile-img-card" />
                             <br />Posted On : {orders.postedDate}
@@ -55,7 +55,10 @@ const FarmerHome = () => {
                             <br />Location:{orders.createdBy.location}
                             <br />Gender:{orders.createdBy.gender}
                             <div className="row">
-                                <Link to={`/farmer/agreeorder`}>Agree Order</Link>
+                                <Link to={`/farmer/agreeorder/${orders._id}`}>Agree Order</Link>
+                            </div>
+                            <div className="row">
+                                <Link to={`/farmer/bidorder/${orders._id}`}>Bid Order</Link>
                             </div>
                         </li>
                     )}
