@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom'
 
 import { getNotification } from '../services/farmerService';
 import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
+import './Farmer.css'
+
+import { Card } from 'react-bootstrap';
 
 const FarmerNotification = () => {
     const dispatch = useDispatch()
@@ -34,21 +36,29 @@ const FarmerNotification = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{backgroundColor: "rgb(215, 253, 232)"}}>
             <Header route={'/farmer/login'} LogOut={FLogOut} />
             <div>
 
-                <strong>Notifications:</strong>
-                <ul>
 
+                <ul>
                     {notification &&
                         notification.map((orders, index) =>
-                            <li key={index}>
-                                Message : {orders.message}
-                                <br />{orders.createdAt}
-                                <br /><br />
 
+                            <li key={index}>
+                                <Card  style={{ backgroundColor:'rgb(212, 245, 212)',width: '92rem', height: '8rem', border: 'solid rgb(2, 112, 2) 3px',
+                                               margin: '10px 30px', borderRadius: '20px', }}>
+                                    <Card.Header  style={{ color: "white", background: "darkcyan", padding: '3px' ,width:'15.5rem' }} 
+                                                  as="h4" text='primary'>Time :  {orders.createdAt}</Card.Header>
+                                   
+                                    <Card.Body style={{ padding: '20px' }}>
+                                        
+                                            <h4>{orders.message}</h4> 
+                                       
+                                    </Card.Body>
+                                </Card>
                             </li>)}
+
                 </ul>
 
             </div>

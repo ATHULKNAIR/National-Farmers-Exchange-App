@@ -251,6 +251,7 @@ const farmerCtrl = {
     getMyOrders: async (req, res) => {
         try {
             const order = await FarmerOrder.find({ createdBy: req.userId })
+            .populate({path:"boughtBy",select:"name phoneNo orderCount"})
                 .sort("-postedDate")
                 .lean()
                 .exec();

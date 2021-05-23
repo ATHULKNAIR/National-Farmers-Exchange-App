@@ -11,6 +11,8 @@ import {farmerLogout} from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 
+import {Card} from 'react-bootstrap';
+
 
 const UpdateFarmerOrder = ({match,history}) => {
   const dispatch = useDispatch()
@@ -75,7 +77,8 @@ console.log(id)
       
           <Header route={'/farmer/login'} LogOut={FLogOut} />
            
-            <Form onSubmit={handleSubmit}  ref={form}>
+           <Card>
+           <Form onSubmit={handleSubmit}  ref={form}>
         {!successful && (
           <div>
 
@@ -123,6 +126,7 @@ console.log(id)
         )}
         <CheckButton style={{ display: "none" }} ref={checkBtn} />
       </Form>
+           </Card>
     </div>
   )
 }
