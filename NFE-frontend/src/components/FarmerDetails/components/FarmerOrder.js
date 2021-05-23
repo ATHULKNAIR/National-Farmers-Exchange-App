@@ -51,10 +51,11 @@ const FarmerOrder = () => {
                                 <br />boughtBy :{orders.boughtBy}
                                 <br />isActive :{JSON.stringify(orders.isActive)}
                                 <br />Due Date : {orders.dueDate}<br />
-                              
-                                <div className="row">
-                                    <Link to={`/farmer/updateorder/${orders._id}`}>Edit Order</Link>
-                                </div>
+                              {orders.isActive == true &&
+                               <div className="row">
+                               <Link to={`/farmer/updateorder/${orders._id}`}>Edit Order</Link>
+                           </div>}
+                               
                                 <br /><br />
                             </li>)}
 
