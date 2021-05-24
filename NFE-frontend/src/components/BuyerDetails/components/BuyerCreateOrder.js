@@ -60,7 +60,7 @@ const BuyerCreateOrder =(props)=>{
               });
         }
         if(successful){
-            return <Redirect to="buyer/profile"/>
+            return <Redirect to="buyer/order"/>
         }
 
     }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const {ObjectId} = mongoose.Schema.Types; 
 
 const buyerNotifSchema = new mongoose.Schema({
@@ -10,6 +11,20 @@ const buyerNotifSchema = new mongoose.Schema({
         type : ObjectId,
         ref: "Buyer"   
     },
+    time : {
+        type : String,
+        default : moment().format(" h:mm a")
+    }
+    ,
+    Date : {
+        type : String,
+        default : moment().format("MMMM Do YYYY")
+    }
+    ,
+    Day : {
+        type : String,
+        default : moment().format("dddd")
+    }
     
 },{
     timestamps : true

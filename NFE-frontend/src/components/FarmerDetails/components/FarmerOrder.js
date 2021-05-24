@@ -40,99 +40,101 @@ const FarmerOrder = () => {
     return (
         <div className="container">
             <Header route={'/farmer/login'} LogOut={FLogOut} />
-            <br/>
+            <br />
             <div className="row">
                 <Button href={`/farmer/createorder`}>
-                    <button style={{width:'91rem',marginLeft:'30px', height:'40px',
-                                    backgroundColor:'lightblue',fontSize:'20px',borderRadius:'20px'}}><strong>Create Order</strong></button></Button>
+                    <button style={{
+                        width: '91rem', marginLeft: '30px', height: '40px',
+                        backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '20px'
+                    }}><strong>Create Order</strong></button></Button>
             </div>
-        
-            
-            
-            
             <div>
-
-
                 <ul>
-
                     {order &&
                         order.map((orders, index) =>
                             <li key={index}>
 
-                                {orders?.isActive == true && 
-                                 <Card style={{
-                                    backgroundColor: 'rgb(212, 245, 212)', border: 'solid rgb(2, 112, 2) 3px',
-                                    margin: '10px 30px', borderRadius: '20px',
-                                }} >
-                                    <Card.Header style={{ color: "white", background: "darkcyan", padding: '3px', width: '87.5rem' }}
-                                        Align='center'
-                                    >ID : {orders._id}</Card.Header>
+                                {orders?.isActive == true &&
+                                    <Card style={{
+                                        backgroundColor: 'rgb(212, 245, 212)', border: 'solid rgb(2, 112, 2) 3px',
+                                        margin: '10px 30px', borderRadius: '20px',
+                                    }} >
+                                        <Card.Header style={{ color: "white", background: "darkcyan", padding: '3px', width: '87.5vw' }}
+                                            Align='center'
+                                        >ID : {orders._id}</Card.Header>
 
-                                    <Card.Body style={{ padding: '20px 50px', fontSize: "20px" }}>
+                                        <Card.Body style={{ padding: '20px 50px', fontSize: "20px" }}>
 
-                                        <br />Product : <strong>{orders.product}</strong>
-                                        <br /> quantity : <strong>{orders.quantity}</strong> Kg
+                                            <br />Product : <strong>{orders.product}</strong>
+                                            <br /> quantity : <strong>{orders.quantity}</strong> Kg
                                         <br /> Base Price : <strong>{orders.baseRate}</strong> Rs/Kg
                                         <br />Due Date : <strong>{orders.dueDate}</strong>
-                                        <br />Posted On : <strong>{orders.postedDate}</strong>
-                                        { orders.isActive == false && 
-                                        <div>
-                                             Buyer Name : <strong>{orders.boughtBy.name}</strong>
-                                             <br/>
+                                            <br />Posted On : <strong>{orders.postedDate}</strong>
+                                            {orders.isActive == false &&
+                                                <div>
+                                                    Buyer Name : <strong>{orders.boughtBy.name}</strong>
+                                                    <br />
                                              Buyer PhoneNumber : <strong>{orders.boughtBy.phoneNo}</strong>
-                                             <br/>Agreed On : <strong>{orders.agreedDate}</strong>
-                                        </div>
-                                        }
-
-                                        {/* <br />isActive :{JSON.stringify(orders.isActive)} */}
-                                        
-                                        <br /><br />
-
-                                        <Card.Footer className="text-muted" style={{ marginLeft: '0px' }}>
-                                            {orders.isActive == true &&
-                                                <Button variant="primary" href={`/farmer/updateorder/${orders._id}`}>
-                                                    <button style={{ backgroundColor: 'lightgreen', padding: '5px 30px', fontSize: '15px', borderRadius: '20px' }}><h4>Edit Order</h4></button>
-                                                </Button>
+                                                    <br />Agreed On : <strong>{orders.agreedDate}</strong>
+                                                </div>
                                             }
-                                        </Card.Footer>
 
-                                    </Card.Body>
-                                </Card>}
-                                {orders?.isActive == false && 
-                                 <Card style={{
-                                    backgroundColor: 'rgb(243, 194, 174)', border: 'solid brown 3px',
-                                    margin: '10px 30px', borderRadius: '20px',
-                                }} >
-                                    <Card.Header style={{ color: "white", background: "brown", padding: '3px', width: '87.5rem' }}
-                                        Align='center'
-                                    >ID : {orders._id}</Card.Header>
+                                            {/* <br />isActive :{JSON.stringify(orders.isActive)} */}
 
-                                    <Card.Body style={{ padding: '20px 50px', fontSize: "20px" }}>
+                                            <br /><br />
 
-                                        <br />Product : <strong>{orders.product}</strong>
-                                        <br /> quantity : <strong>{orders.quantity}</strong> Kg
+                                            <Card.Footer className="text-muted" style={{ marginLeft: '0px' }}>
+                                                {orders.isActive == true &&
+                                                    <Button variant="primary" href={`/farmer/updateorder/${orders._id}`}>
+                                                        <button style={{ backgroundColor: 'lightgreen', padding: '5px 30px', fontSize: '15px', borderRadius: '20px' }}><h4>Edit Order</h4></button>
+                                                    </Button>
+                                                }
+                                            </Card.Footer>
+
+                                        </Card.Body>
+                                    </Card>}
+                                {orders?.isActive == false &&
+                                    <Card style={{
+                                        backgroundColor: 'rgb(243, 194, 174)', border: 'solid brown 3px',
+                                        margin: '10px 30px', borderRadius: '20px',
+                                    }} >
+                                        <Card.Header style={{ color: "white", background: "brown", padding: '3px', width: '87.5vw' }}
+                                            Align='center'
+                                        >ID : {orders._id}</Card.Header>
+
+                                        <Card.Body style={{ padding: '20px 50px', fontSize: "20px" }}>
+
+                                            {orders.isActive == false &&
+                                                <div>
+                                                    {/* <div  className="profile">
+                                             <img src={orders.boughtBy.photo}/>
+                                             </div> */}
+                                             Sold To : <strong>{orders.boughtBy.name}</strong>
+                                                    <br />
+                                             Contact : <strong>{orders.boughtBy.phoneNo}</strong>
+                                                    <br />
+                                             Location : <strong>{orders.boughtBy.location}</strong>
+                                             <br />
+                                             Agreed On : <strong>{orders.agreedDate}</strong>
+                                                </div>
+                                            }
+                                            <br />Product : <strong>{orders.product}</strong>
+                                            <br /> quantity : <strong>{orders.quantity}</strong> Kg
                                         <br /> Base Price : <strong>{orders.baseRate}</strong> Rs/Kg
                                         <br />Due Date : <strong>{orders.dueDate}</strong>
-                                        <br />Posted On : <strong>{orders.postedDate}</strong>
-                                        { orders.isActive == false && 
-                                        <div>
-                                             Sold To : <strong>{orders.boughtBy.name}</strong>
-                                             <br/>
-                                             Contact : <strong>{orders.boughtBy.phoneNo}</strong>
-                                        </div>
-                                        }
+                                            <br />Posted On : <strong>{orders.postedDate}</strong>
 
-                                        {/* <br />isActive :{JSON.stringify(orders.isActive)} */}
+                                            {/* <br />isActive :{JSON.stringify(orders.isActive)} */}
 
-                                    </Card.Body>
-                                </Card>}
-                               
+                                        </Card.Body>
+                                    </Card>}
+
                             </li>)}
 
                 </ul>
 
             </div>
-           
+
 
         </div >
     );

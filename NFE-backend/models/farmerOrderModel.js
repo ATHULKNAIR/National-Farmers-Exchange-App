@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const moment = require('moment')
 const {ObjectId} = mongoose.Schema.Types;
 
 const farmerOrderSchema = new mongoose.Schema({
@@ -16,11 +16,19 @@ const farmerOrderSchema = new mongoose.Schema({
         required : true
     },
     postedDate : {
-        type : Date,
-        default : Date.now
+        type : String,
+        default : moment().format("MMMM Do YYYY")
+    },
+    postedTime : {
+        type : String,
+        default : moment().format(" h:mm:ss a")
+    },
+    postedDay : {
+        type : String,
+        default : moment().format("dddd")
     },
     dueDate : {
-        type : Date,
+        type : String,
         required : true
     },
     createdBy : {
@@ -29,14 +37,18 @@ const farmerOrderSchema = new mongoose.Schema({
     },
     boughtBy : {
         type : ObjectId,
-        ref : "Buyer"
+        ref : "Buyer",
+        default:null
     },
     isActive : {
         type : Boolean,
         default : true
     },
     agreedDate :{
-        type : Date
+        type : String
+    },
+    agreedTime : {
+        type: String
     }
    
 })

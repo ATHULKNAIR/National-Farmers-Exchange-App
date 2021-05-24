@@ -17,7 +17,7 @@ module.exports = function (app){
     app.patch("/farmer/editprofile",auth,farmerCtrl.editFarmer);
     app.get("/farmer/profile/all",auth,farmerAdmin,farmerCtrl.getUsersAllInfor);
     app.get('/farmer/home',auth,farmerCtrl.farmerHome);
-    app.post('/farmer/order/create',auth,farmerCtrl.createOrder);
+    app.post('/farmer/order',auth,farmerCtrl.createOrder);
     app.get('/farmer/order',auth,farmerCtrl.getMyOrders);
     app.delete('/farmer/order/:id',auth,farmerCtrl.deletOrder);
     app.patch('/farmer/order/:id',auth,farmerCtrl.updateOrder);

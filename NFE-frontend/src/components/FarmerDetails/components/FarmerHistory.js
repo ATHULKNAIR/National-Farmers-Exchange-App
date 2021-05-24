@@ -50,12 +50,14 @@ const FarmerHistory = () => {
                      
             </div>
                                 <br />Order For : {orders.createdBy.name}
-                                <br />Contact No :{orders.createdBy.phoneNo}
-                                <br />Created At :{orders.postedDate}
-                                <br />Product :{orders.product}
-                                <br />Quantity in Kg :{orders.quantity}
-                                <br />Amount / Kg :{orders.baseRate}
-                                <br />Due Date :{orders.dueDate}
+                                <br />Contact No : {orders.createdBy.phoneNo}
+                                <br />Created At : {orders.postedDate}
+                                <br />Product : {orders.product}
+                                <br />Quantity in Kg : {orders.quantity}
+                                <br />Amount /Kg : {orders.baseRate}
+                                <br />Agreed Date : {orders.agreedDate} 
+
+                                <br />Due Date : {orders.dueDate}
                                 <br /><br />
 
                             </li>)}

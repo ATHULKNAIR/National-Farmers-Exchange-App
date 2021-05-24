@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const {ObjectId} = mongoose.Schema.Types;
 
@@ -16,8 +17,16 @@ const buyerOrderSchema = new mongoose.Schema({
         required : true
     },
     postedDate : {
-        type : Date,
-        default : Date.now
+        type : String,
+        default : moment().format(" MMMM Do YYYY")
+    },
+    postedTime : {
+        type : String,
+        default : moment().format(" h:mm a")
+    },
+    postedDay : {
+        type : String,
+        default : moment().format("dddd")
     },
     dueDate : {
         type : String,
@@ -49,9 +58,12 @@ const buyerOrderSchema = new mongoose.Schema({
         type : Number,
         default : 1
     },
-    adreedDate :{
-        type : Date,
-        default:Date.now
+    agreedDate :{
+        type : String,
+        
+    },
+    agreedTime : {
+        type : String
     }
    
 })

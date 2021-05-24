@@ -1,6 +1,7 @@
 const Farmer = require('../models/farmerModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
 const Buyer = require('../models/buyerModel');
 const FarmerOrder = require('../models/farmerOrderModel')
 const BuyerOrder = require('../models/buyerOrderModel');
@@ -251,8 +252,8 @@ const farmerCtrl = {
     getMyOrders: async (req, res) => {
         try {
             const order = await FarmerOrder.find({ createdBy: req.userId })
-            .populate({path:"boughtBy",select:"name phoneNo orderCount"})
-                .sort("-postedDate")
+            .populate({path:"boughtBy",select:"name phoneNo orderCount location photo"})
+                .sort("-postedDate -postedTime")
                 .lean()
                 .exec();
             res.send(order);
@@ -356,7 +357,7 @@ const farmerCtrl = {
                     $push: { notification: farmerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 await BuyerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    boughtFrom: req.userId, isActive: false,agreedDate : Date.now()
+                    boughtFrom: req.userId, isActive: false,agreedDate : moment().format("MMMM Do YYYY"),agreedTime : moment().format("h:mm a")
                 })
 
                 let buyerNotification = new BuyerNotification({

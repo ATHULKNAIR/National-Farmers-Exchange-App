@@ -46,14 +46,14 @@ const FarmerHome = () => {
                         <li key={index}>
                             <img src={orders.createdBy.photo} className="profile-img-card" />
                             <br />Posted On : {orders.postedDate}
-                            <br />Product :{orders.product}
-                            <br /> quantity :{orders.quantity}Kg
-                            <br /> Base Price : {orders.baseRate}Rs/Kg
-                            <br />boughtBy :{orders.boughtBy}
+                            <br />Product : {orders.product}
+                            <br /> quantity :{orders.quantity} Kg
+                            <br /> Base Price : {orders.baseRate} Rs/Kg
+                            {/* <br />boughtBy :{orders.boughtBy} */}
                             <br />Due Date : {orders.dueDate}
-                            <br />Name:{orders.createdBy.name}
-                            <br />Location:{orders.createdBy.location}
-                            <br />Gender:{orders.createdBy.gender}
+                            {/* <br />Name:{orders.createdBy.name} */}
+                            <br />Location : {orders.createdBy.location}
+                            {/* <br />Gender:{orders.createdBy.gender} */}
                             <div className="row">
                                 <Link to={`/farmer/agreeorder/${orders._id}`}>Agree Order</Link>
                             </div>

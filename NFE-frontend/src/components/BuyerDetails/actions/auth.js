@@ -9,8 +9,8 @@ import {
 
   import AuthService from '../services/buyerAuthService';
 
-  export const buyerRegister = (name,email,password)=>(dispatch)=>{
-      return AuthService.register(name,email,password)
+  export const buyerRegister = (name,email,password,phoneNo,location,gender,product)=>(dispatch)=>{
+      return AuthService.register(name,email,password,phoneNo,location,gender,product)
           .then((response)=>{
               dispatch({
                   type : REGISTER_SUCCESS

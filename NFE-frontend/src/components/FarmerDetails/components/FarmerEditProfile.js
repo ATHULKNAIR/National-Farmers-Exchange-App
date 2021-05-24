@@ -18,6 +18,7 @@ const FarmerEditProfile = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
+  const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [location, setLocation] = useState("");
@@ -26,6 +27,10 @@ const FarmerEditProfile = (props) => {
 
   const { message } = useSelector(state => state.message);
 
+  const onChangePhoto = (e) => {
+    const photo = e.target.value;
+    setPhoto(photo)
+  }
   const onChangeName = (e) => {
     const name = e.target.value;
     setName(name)
@@ -48,7 +53,7 @@ const FarmerEditProfile = (props) => {
     setSuccessful(false);
 
     if (checkBtn.current.context._errors.length === 0) {
-      editFarmerProfile(name, phoneNo, location, product)
+      editFarmerProfile(photo,name, phoneNo, location, product)
         .then(() => {
           setSuccessful(true);
           props.history.push('/farmer/profile');
@@ -76,6 +81,12 @@ const FarmerEditProfile = (props) => {
         {!successful && (
           <div>
 
+            <div className="form-group">
+              <label htmlFor="photo">Change Photo</label>
+              <Input type="text" className="form-control" name="photo" value={photo}
+                onChange={onChangePhoto}
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="name">Change Name</label>
               <Input type="text" className="form-control" name="name" value={name}

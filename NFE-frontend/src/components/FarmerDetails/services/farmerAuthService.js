@@ -15,9 +15,9 @@ class AuthService {
     logout(){
        window.localStorage.removeItem("farmer");
     }
-    register(name,phoneNo,password){
+    register(name,phoneNo,password,location,gender,product){
         return axios.post('http://localhost:5000/farmer/register',{
-            name,phoneNo,password
+            name,phoneNo,password,location,gender,product
         });
     }
     getCurrentUser(){

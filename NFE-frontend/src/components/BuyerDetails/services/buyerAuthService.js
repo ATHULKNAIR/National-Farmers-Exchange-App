@@ -18,9 +18,9 @@ class AuthService {
         localStorage.removeItem("buyer");
     }
 
-    register(name,email,password){
+    register(name,email,password,phoneNo,location,gender,product){
         return axios.post("http://localhost:5000/buyer/register",{
-            name,email,password
+            name,email,password,phoneNo,location,gender,product
         });
     }
 

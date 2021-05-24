@@ -59,7 +59,7 @@ const FarmerCreateOrder = (props) => {
         });
     }
     if (successful) {
-      return <Redirect to="farmer/profile" />
+      return <Redirect to="farmer/order" />
     }
 
   }

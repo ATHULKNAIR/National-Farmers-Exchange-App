@@ -31,7 +31,15 @@ const required = (value) => {
       );
     }
   };
-
+  const validPhoneNo = (value) => {
+    if (value.length != 10 ) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          Phone Number should be 10 digits..!
+        </div>
+      );
+    }
+  };
   const validPassword = (value) => {
     if (value.length < 6 ) {
       return (
@@ -49,7 +57,11 @@ const required = (value) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phoneNo, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
+    const [location, setLocation] = useState("");
+    const [gender, setGender] = useState("");
+    const [product, setProduct] = useState("");
     const [successful, setSuccessful] = useState(false);
 
     const { message } = useSelector(state => state.message);
@@ -64,10 +76,26 @@ const required = (value) => {
         const email = e.target.value;
         setEmail(email);
     };
+    const onChangePhoneNo = (e)=>{
+      const phoneNo = e.target.value;
+      setPhoneNo(phoneNo);
+  };
     const onChangePassword = (e)=>{
         const password = e.target.value;
         setPassword(password);
     };
+    const onChangeLocation = (e)=>{
+      const location = e.target.value;
+      setLocation(location);
+  };
+  const onChangeGender = (e)=>{
+      const gender = e.target.value;
+      setGender(gender);
+  };
+  const onChangeProduct = (e)=>{
+      const product = e.target.value;
+      setProduct(product);
+  };
     const handleRegister=(e)=>{
         e.preventDefault();
         setSuccessful(false);
@@ -75,7 +103,7 @@ const required = (value) => {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(buyerRegister(name, email, password))
+            dispatch(buyerRegister(name, email,password,phoneNo,location,gender,product))
               .then(() => {
                 setSuccessful(true);
               })
@@ -119,10 +147,39 @@ const required = (value) => {
                       </div>
 
                       <div className="form-group">
+                        <label htmlFor="phoneNo">Phone Number</label>
+                        <Input type="text" className="form-control" name="phoneNo" value={phoneNo}
+                               onChange={onChangePhoneNo} validations={[required, validPhoneNo]}
+                        />
+                      </div>
+
+                      <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <Input type="password" className="form-control" name="password"
                                value={password} onChange={onChangePassword} 
                                validations={[required, validPassword]}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="location">Location</label>
+                        <Input type="location" className="form-control" name="location"
+                               value={location} onChange={onChangeLocation} 
+                               
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="gender">Gender</label>
+                        <Input type="gender" className="form-control" name="gender"
+                               value={gender} onChange={onChangeGender} 
+                               
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="product">Product</label>
+                        <Input type="product" className="form-control" name="product"
+                               value={product} onChange={onChangeProduct} 
+                               
                         />
                       </div>
 

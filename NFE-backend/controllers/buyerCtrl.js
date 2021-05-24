@@ -6,6 +6,7 @@ const BuyerOrder = require('../models/buyerOrderModel');
 const FarmerOrder = require('../models/farmerOrderModel');
 const BuyerNotification = require('../models/buyerNotiModel')
 const FarmerNotification = require('../models/farmerNotiModel')
+const moment = require('moment');
 
 
 const buyerCtrl = {
@@ -21,14 +22,9 @@ const buyerCtrl = {
                 , phoneNo, gender, location, product
             } = req.body;
 
-
-            if (!validateEmail(email)) {
-                return res.status(400).json({ msg: "Invalid email" })
-            }
-
-            const buyer = await Buyer.findOne({ email });
+            const buyer = await Buyer.findOne({ phoneNo });
             if (buyer) {
-                return res.status(400).json({ msg: "Email already exists" })
+                return res.status(400).json({ msg: "Phone Number already exists" })
             }
             if (password.length < 6) {
                 return res.status(400).json({ msg: "Password length too short" })
@@ -124,6 +120,7 @@ const buyerCtrl = {
                 photo: buyer.photo,
                 role: authorities,
                 name: buyer.name,
+                email:buyer.email,
                 phoneNo: buyer.phoneNo,
                 order: buyer.order,
                 location: buyer.location,
@@ -229,7 +226,6 @@ const buyerCtrl = {
                 createdBy: buyer
             });
 
-            await order.save();
 
             await Buyer.findByIdAndUpdate(req.userId, {
                 $push: { order: order._id },
@@ -240,12 +236,13 @@ const buyerCtrl = {
                 message: `A new Order with id : ${order._id} has been created by you`,
                 createdBy: buyer
             })
-            await notification.save();
 
             await Buyer.findByIdAndUpdate(req.userId, {
                 $push: { notification: notification._id }
             })
+            await order.save();
 
+            await notification.save();
 
             res.status(200).json({ success: true, data: order });
 
@@ -259,7 +256,8 @@ const buyerCtrl = {
     getMyOrders: async (req, res) => {
         try {
             const order = await BuyerOrder.find({ createdBy: req.userId })
-                .sort("-postedDate")
+            .populate({path:"boughtFrom",select:"name photo phoneNo orderCount location"})
+                .sort("-postedDate -postedTime")
                 .lean()
                 .exec();
             res.send(order);
@@ -286,12 +284,13 @@ const buyerCtrl = {
                 message: `Order with id : ${req.params.id} is updated by you`,
                 createdBy: req.userId
             })
-            await notification.save();
 
             await Buyer.findByIdAndUpdate(req.userId, {
                 $push: { notification: notification._id }
             })
-            res.json({ msg: "Order Updated" })
+            await notification.save();
+
+            // res.json({ msg: "Order Updated" })
             res.status(200).json({ success: true, data: order });
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -359,13 +358,15 @@ const buyerCtrl = {
                     message: `You have agreed to Order with id : ${req.params.id}. You can contact ${FarmerName} by ${FarmerPhone} `,
                     createdBy: req.userId
                 })
-                await buyerNotification.save();
+                
 
                 await Buyer.findByIdAndUpdate({ _id: req.userId }, {
                     $push: { notification: buyerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 await FarmerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    boughtBy: req.userId, isActive: false , agreedDate : Date.now()
+                    boughtBy: req.userId, isActive: false , 
+                    agreedDate : moment().format(" MMMM Do YYYY"),
+                    agreedTime : moment().format("h:mm a")
                 })
 
                 let farmerNotification = new FarmerNotification({
@@ -373,10 +374,12 @@ const buyerCtrl = {
                     createdBy: farmer
                 })
 
-                await farmerNotification.save();
                 await Farmer.findOneAndUpdate({ _id: farmer }, {
                     $push: { notification: farmerNotification._id, myOrderHistory: req.params.id }
                 })
+                await buyerNotification.save();
+                await farmerNotification.save();
+
                 res.json("Agreed to this Offer")
             } else {
                 return res.send("Order is not accessible")
@@ -398,7 +401,7 @@ const buyerCtrl = {
             if (isBid) {
 
                 let farmerNotification = new FarmerNotification({
-                    message: `Your Bid for Order, id : ${req.params.id}, is rejected . `,
+                    message: `Your Bid for Order id :  ${req.params.id}  is rejected . `,
                     createdBy: farmer
                 })
 
@@ -406,7 +409,7 @@ const buyerCtrl = {
                     $push: { notification: farmerNotification._id }
                 })
                 let buyerNotification = new BuyerNotification({
-                    message: `You rejected a BID for Order id : ${req.params.id}  by ${farmer}`,
+                    message: `You rejected the BID for Order id :  ${req.params.id}   by   ${farmer}`,
                     createdBy: req.userId
                 })
 
@@ -435,23 +438,24 @@ const buyerCtrl = {
                 .populate({ path: "createdBy", select: "name phoneNo" });
             const BuyerPhone = buyer.createdBy.phoneNo;
             const BuyerName = buyer.createdBy.name;
+            const TotalAmount = parseInt(buyer.baseRate + buyer.bidAmount)
 
             const farmerId = buyer.bidBy
             const isBid = buyer.isBid
 
             const farmer = await Farmer.findOne({ _id: farmerId })
 
-            // res.json(farmer.phoneNo)
+            // res.json(TotalAmount)
             if (isBid) {
                 let farmerNotification = new FarmerNotification({
-                    message: `Your Bid for Order, id : ${req.params.id}, is accepted. You can contact ${BuyerName} with Phone Number : ${BuyerPhone} `,
+                    message: `Your Bid for Order id :  ${req.params.id}   is accepted. You can contact ${BuyerName} with Phone Number :  ${BuyerPhone} `,
                     createdBy: farmerId
                 })
                 await Farmer.findByIdAndUpdate({ _id: farmerId }, {
                     $push: { notification: farmerNotification._id, agreedOrderHistory: req.params.id }
                 })
                 let buyerNotification = new BuyerNotification({
-                    message: `You accepted a BID for Order id : ${req.params.id}. You can contact ${farmer.name} with Phone Number : ${farmer.phoneNo} `,
+                    message: `You accepted a BID for Order id :  ${req.params.id}.  You can contact  ${farmer.name}  with Phone Number :  ${farmer.phoneNo} `,
                     createdBy: req.userId
                 })
 
@@ -459,7 +463,9 @@ const buyerCtrl = {
                     $push: { notification: buyerNotification._id, myOrderHistory: req.params.id }
                 })
                 await BuyerOrder.findOneAndUpdate({ _id: req.params.id }, {
-                    isActive: true, isBid: false, bidBy: null, boughtFrom: farmerId
+                    isActive:false, isBid: false, bidBy: null, boughtFrom: farmerId,baseRate : TotalAmount,
+                    agreedDate : moment().format("MMMM Do YYYY"),
+                    agreedTime : moment().format("h:mm a")
                 })
 
                 await farmerNotification.save();

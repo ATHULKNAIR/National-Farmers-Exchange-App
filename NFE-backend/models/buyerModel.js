@@ -43,7 +43,8 @@ const buyerSchema = new mongoose.Schema({
         ref: "BuyerOrder"
     }],
     orderCount: {
-        type: Number
+        type: Number,
+        default : 0
     },
     notification: [{
         type: ObjectId,

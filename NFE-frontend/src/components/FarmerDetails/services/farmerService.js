@@ -6,9 +6,9 @@ const getFarmerProfile = () => {
         headers: farmerAuthHeader()
     });
 }
-const editFarmerProfile = ( name, phoneNo,location,product)=>{
+const editFarmerProfile = ( photo,name, phoneNo,location,product)=>{
     return axios.patch('http://localhost:5000/farmer/editprofile',{
-         name, phoneNo,location,product
+        photo, name, phoneNo,location,product
     },{headers:farmerAuthHeader()})
 };
 
@@ -18,7 +18,7 @@ const getFarmerHome = () => {
     });
 }
 const createFarmerOrder = (product, quantity, baseRate, dueDate) => {
-    return axios.post('http://localhost:5000/farmer/order/create', {
+    return axios.post('http://localhost:5000/farmer/order', {
         product, quantity, baseRate, dueDate
     }, { headers: farmerAuthHeader() });
 }

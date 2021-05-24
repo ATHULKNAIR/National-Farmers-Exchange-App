@@ -9,8 +9,8 @@ import {
 
   import AuthService from '../services/farmerAuthService';
 
-  export const farmerRegister = (name,phoneNo,password)=>(dispatch)=>{
-      return AuthService.register(name,phoneNo,password)
+  export const farmerRegister = (name,phoneNo,password,location,gender,product)=>(dispatch)=>{
+      return AuthService.register(name,phoneNo,password,location,gender,product)
         .then((response)=>{
             dispatch({
                 type: REGISTER_SUCCESS

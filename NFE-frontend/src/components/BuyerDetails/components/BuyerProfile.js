@@ -68,21 +68,6 @@ const BuyerProfile = ()=>{
                 <strong>Product : </strong>{buyer.product}
             </p>
             
-            
-      {/* <strong>Order:</strong>
-      <ul>
-
-        {buyer.order &&
-          buyer.order.map((orders, index) => 
-          <li key={index}>Posted On : {orders.postedDate}
-                  <br/>Product :{orders.product} 
-                  <br/> quantity :{orders.quantity}Kg 
-                  <br/> Base Price : {orders.baseRate}Rs/Kg 
-                  <br/>boughtFrom :{orders.boughtFrom} 
-                  <br/>isActive :{JSON.stringify  (orders.isActive)}
-                  <br/>Due Date : {orders.dueDate}<br/><br/>
-          </li>)}
-      </ul> */}
         <div className="row">
                     
                     <Link to="/buyer/editprofile">Edit Profile</Link>
