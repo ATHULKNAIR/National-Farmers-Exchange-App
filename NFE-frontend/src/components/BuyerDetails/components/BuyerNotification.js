@@ -50,7 +50,7 @@ const BuyerNotification = () => {
                                   <Card style={{ backgroundColor:'rgb(208, 244, 252)',width: '92rem', height: '8rem', border: 'solid rgb(2, 62, 97) 3px',
                                                margin: '10px 30px', borderRadius: '20px' }}>
                                     <Card.Header  style={{ color: "white", background: "rgb(2, 62, 97)", padding: '3px' ,width:'12.5rem' }} 
-                                                  as="h4" text='primary'>{orders.createdAt}</Card.Header>
+                                                  as="h4" text='primary'>{orders.Date}{orders.time}</Card.Header>
                                    
                                     <Card.Body style={{ padding: '20px' }}>
                                <h4>{orders.message}</h4> 

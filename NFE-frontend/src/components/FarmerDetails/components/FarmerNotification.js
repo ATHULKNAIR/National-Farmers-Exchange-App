@@ -49,7 +49,7 @@ const FarmerNotification = () => {
                                 <Card  style={{ backgroundColor:'rgb(212, 245, 212)',width: '92rem', height: '8rem', border: 'solid rgb(2, 112, 2) 3px',
                                                margin: '10px 30px', borderRadius: '20px', }}>
                                     <Card.Header  style={{ color: "white", background: "darkcyan", padding: '3px' ,width:'15.5rem' }} 
-                                                  as="h4" text='primary'>Time :  {orders.createdAt}</Card.Header>
+                                                  as="h4" text='primary'> {orders.Date}{orders.time}</Card.Header>
                                    
                                     <Card.Body style={{ padding: '20px' }}>
                                         
