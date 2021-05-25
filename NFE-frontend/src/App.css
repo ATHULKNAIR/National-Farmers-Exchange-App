@@ -1,58 +1,51 @@
 * {
-  margin: 0;
+  margin: 0%;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  align-items: center;
+  /* align-items: center; */
+  /* text-align: center; */
+  max-height: 100vh;
+  max-width: none;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lato&family=Roboto&display=swap");
 
-.home,
-.aboutus {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
+label {
+  display: block;
+  margin-top: 10px;
+}
+.ml-auto {
+  height: 100px;
 }
 
-label {
-    display: block;
-    margin-top: 10px;
-  }
-  .ml-auto{
-    height:100px
-  }
-  
-  .nav-link{
-    font-size: 50px;
-    
-  }
-  .card-container.card {
-    max-width: 350px !important;
-    padding: 40px 40px;
-  }
-  
-  .card {
-    background-color: #f7f7f7;
-    padding: 20px 25px 30px;
-    margin: 0 auto 25px;
-    margin-top: 50px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  .profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-  }
+.nav-link {
+  font-size: 50px;
+}
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+}
+
+.card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}

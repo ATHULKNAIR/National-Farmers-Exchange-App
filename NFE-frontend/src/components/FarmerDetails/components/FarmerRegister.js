@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
-
 import {farmerRegister} from '../actions/auth';
-
-import '../../Header/Header.css';
+import './Farmer.css';
+import '../../Header/Header.css'
 import farm from '../../images/f-logo.jpg';
 import industry from '../../images/i-logo.jpg';
+import {FaUserAlt} from "react-icons/fa";
+import {FaPhoneSquareAlt } from 'react-icons/fa';
+import {RiLockPasswordFill} from 'react-icons/ri';
+import {IoLocation} from 'react-icons/io5';
+import {FaGenderless} from 'react-icons/fa';
+import {FaProductHunt} from 'react-icons/fa'
 
 const required = (value) => {
     if (!value) {
@@ -109,7 +113,7 @@ const required = (value) => {
         <img src={industry} className="industry" alt="industry" />
         </header>
           <div className="col-md-12">
-            <div className="card card-container">
+            <div className="card card-container register">
                 <img src="https://res.cloudinary.com/mycartdb/image/upload/v1621404771/frmr_vrycol.jpg"
                      alt="profile-image" className="profile-img-card" 
                 />
@@ -117,51 +121,51 @@ const required = (value) => {
                   {!successful && (
                     <div>
                       <div className="form-group">
-                        <label htmlFor="name">Username</label>
+                        <label htmlFor="name"><FaUserAlt/></label>
                         <Input type="text" className="form-control" name="name" value={name}
-                               onChange={onChangeName} validations={[required]}
+                               onChange={onChangeName} validations={[required]} placeholder="User Name"
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="phoneNo">Phone Number</label>
+                        <label htmlFor="phoneNo"><FaPhoneSquareAlt/></label>
                         <Input type="text" className="form-control" name="phoneNo" value={phoneNo}
-                               onChange={onChangePhoneNo} validations={[required, validPhoneNo]}
+                               onChange={onChangePhoneNo} validations={[required, validPhoneNo]} placeholder="Mobile Number"
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password"><RiLockPasswordFill/></label>
                         <Input type="password" className="form-control" name="password"
                                value={password} onChange={onChangePassword} 
-                               validations={[required, validPassword]}
+                               validations={[required, validPassword]} placeholder="Password"
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="location">Location</label>
+                        <label htmlFor="location"><IoLocation/></label>
                         <Input type="location" className="form-control" name="location"
-                               value={location} onChange={onChangeLocation} 
+                               value={location} onChange={onChangeLocation} placeholder="Location"
                                
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="gender">Gender</label>
+                        <label htmlFor="gender"><FaGenderless/></label>
                         <Input type="gender" className="form-control" name="gender"
-                               value={gender} onChange={onChangeGender} 
+                               value={gender} onChange={onChangeGender} placeholder="Gender"
                                
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="product">Product</label>
+                        <label htmlFor="product"><FaProductHunt/></label>
                         <Input type="product" className="form-control" name="product"
-                               value={product} onChange={onChangeProduct} 
+                               value={product} onChange={onChangeProduct} placeholder="Product"
                                
                         />
                       </div>
 
-                      <div className="form-group">
+                      
                         <button className="btn btn-primary btn-block">Sign Up</button>
-                      </div>
+                      
                     </div>
                   )}
 

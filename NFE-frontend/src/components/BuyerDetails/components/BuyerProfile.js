@@ -8,6 +8,7 @@ import {buyerLogout} from '../actions/auth'
 import {getBuyerProfile} from '../services/buyerService';
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
+import './Buyer.css';
 
 const BuyerProfile = ()=>{
   const dispatch = useDispatch()
@@ -37,15 +38,15 @@ const BuyerProfile = ()=>{
       }
     
       return (
-        <div className="container">
+        <div >
           <Header route={'/buyer/login'} LogOut={BLogOut} />
 
-             <div>
+             <div className="profile-container">
+               <div>
                 <img src={buyer.photo} alt="Profile Pic"
                      className="profile-img-card"/>
-                     
-            </div>
-            <p>
+              </div>
+               <p>
                 <strong>Name : </strong>{buyer.name}
             </p>
             <p>
@@ -71,7 +72,9 @@ const BuyerProfile = ()=>{
         <div className="row">
                     
                     <Link to="/buyer/editprofile">Edit Profile</Link>
-                </div>
+                </div>      
+            </div>
+            
         </div>
       );
 }

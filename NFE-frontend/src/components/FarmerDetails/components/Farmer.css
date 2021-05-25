@@ -2,6 +2,69 @@
     background-color:rgb(215, 253, 232)
 } */
 
-.card-farmer-notification{
-    width:92rem
+.card-farmer-notification {
+  width: 92rem;
+}
+
+.card-container {
+  width: 1000px !important;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.form-group {
+  display: flex;
+  padding: 10px;
+}
+
+.form-control {
+  margin-left: 10px;
+}
+.profile-img-card {
+  background-color: #eed;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.card-container-register {
+  background-color: black;
+}
+
+.profile-container {
+  margin: 30px;
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-img {
+  height: 100px;
+  width: 100px;
+}
+
+.myhistory {
+  margin: 9px 50px 0px 50px;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  border-radius: 15px;
+}
+
+.history-head {
+  background-color: #0784fd;
+  height: 50px;
+  color: white;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 10px 0px 0px 60px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }

@@ -7,6 +7,7 @@ import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
 import { Link } from "react-router-dom";
+import {Card, Button} from 'react-bootstrap';
 
 const FarmerHome = () => {
     const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const FarmerHome = () => {
     }
 
     return (
-        <div className="container">
+        <div>
             <Header route={'/farmer/login'} LogOut={FLogOut} />
 
             <ul>

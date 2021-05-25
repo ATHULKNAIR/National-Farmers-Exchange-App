@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
-
+import {Card } from 'react-bootstrap';
 import { getMyOrderHistory } from '../services/farmerService';
 import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
 import '../../Header/Header.css';
+import './Farmer.css'
 
 const FarmerOrderHistory = () => {
     const dispatch = useDispatch()
@@ -34,32 +35,34 @@ const FarmerOrderHistory = () => {
     }
 
     return (
-        <div className="container">
+        <div>
             <Header route={'/farmer/login'} LogOut={FLogOut} />
-            <div>
+            <div className="myhistory">
 
-                <strong>History:</strong>
+                <header className="history-head"> History</header>
                 <ul>
 
                     {history &&
                         history.map((orders, index) =>
-                            <li key={index}>
-                                <div>
+                            <div bg="info" key={index}>
+            <div>
                 <img src={orders.boughtBy.photo} alt="Profile Pic"
                      className="profile-img-card"/>
                      
             </div>
-                                <br />Sold To : {orders.boughtBy.name}
-                                <br />Contact No :{orders.boughtBy.phoneNo}
-                                <br />Created At :{orders.postedDate}
-                                <br />Product :{orders.product}
-                                <br />Quantity in Kg :{orders.quantity}
-                                <br />Amount / Kg :{orders.baseRate}
-                                <br />Location :{orders.boughtBy.location}
-                                <br />Agreed Date :{orders.agreedDate}
-                                <br /><br />
-
-                            </li>)}
+            <div >
+                <p>Sold To : {orders.boughtBy.name} </p>
+                <p>Contact No :{orders.boughtBy.phoneNo}</p>
+                <p>Created At :{orders.postedDate}</p>
+                <p>Product :{orders.product}</p>
+                <p>Quantity in Kg :{orders.quantity}</p>
+                <p>Amount / Kg :{orders.baseRate}</p>
+                <p>Location :{orders.boughtBy.location}</p>
+                <p>Agreed Date :{orders.agreedDate}</p>
+                
+            </div >
+                               
+                            </div>)}
                 </ul>
 
             </div>

@@ -11,6 +11,13 @@ import farm from '../../images/f-logo.jpg';
 import industry from '../../images/i-logo.jpg';
 
 import {buyerRegister} from '../actions/auth';
+import {FaUserAlt} from "react-icons/fa";
+import {MdEmail} from "react-icons/md";
+import {FaPhoneSquareAlt } from 'react-icons/fa';
+import {RiLockPasswordFill} from 'react-icons/ri';
+import {IoLocation} from 'react-icons/io5';
+import {FaGenderless} from 'react-icons/fa';
+import {FaProductHunt} from 'react-icons/fa'
 
 const required = (value) => {
     if (!value) {
@@ -133,59 +140,62 @@ const required = (value) => {
                   {!successful && (
                     <div>
                       <div className="form-group">
-                        <label htmlFor="name">Username</label>
-                        <Input type="text" className="form-control" name="name" value={name}
+                        <label htmlFor="name"><FaUserAlt/></label>
+                        <Input type="text" className="form-control" name="name" value={name} placeholder="User Name"
                                onChange={onChangeName} validations={[required]}
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <Input type="text" className="form-control" name="email" value={email}
+                        <label htmlFor="email"><MdEmail/></label>
+                        <Input type="text" className="form-control" name="email" value={email} placeholder="e-mail"
                                onChange={onChangeEmail} validations={[required, validEmail]}
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="phoneNo">Phone Number</label>
+                        <label htmlFor="phoneNo"><FaPhoneSquareAlt/></label>
                         <Input type="text" className="form-control" name="phoneNo" value={phoneNo}
+                        placeholder="Mobile Number"
                                onChange={onChangePhoneNo} validations={[required, validPhoneNo]}
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password"><RiLockPasswordFill/></label>
                         <Input type="password" className="form-control" name="password"
+                        placeholder="Password"
                                value={password} onChange={onChangePassword} 
                                validations={[required, validPassword]}
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="location">Location</label>
+                        <label htmlFor="location"><IoLocation/></label>
                         <Input type="location" className="form-control" name="location"
+                        placeholder="Location"
                                value={location} onChange={onChangeLocation} 
                                
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="gender">Gender</label>
-                        <Input type="gender" className="form-control" name="gender"
+                        <label htmlFor="gender"><FaGenderless/></label>
+                        <Input type="gender" className="form-control" name="gender" placeholder="Gender"
                                value={gender} onChange={onChangeGender} 
                                
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="product">Product</label>
-                        <Input type="product" className="form-control" name="product"
+                        <label htmlFor="product"><FaProductHunt/></label>
+                        <Input type="product" className="form-control" name="product" placeholder="Product"
                                value={product} onChange={onChangeProduct} 
                                
                         />
                       </div>
 
-                      <div className="form-group">
+                      
                         <button className="btn btn-primary btn-block">Sign Up</button>
-                      </div>
+                      
                     </div>
                   )}
 

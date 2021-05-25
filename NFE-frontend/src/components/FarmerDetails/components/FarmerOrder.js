@@ -38,13 +38,14 @@ const FarmerOrder = () => {
     }
 
     return (
-        <div className="container">
+        <div >
             <Header route={'/farmer/login'} LogOut={FLogOut} />
+                        
             <br />
             <div className="row">
                 <Button href={`/farmer/createorder`}>
                     <button style={{
-                        width: '91rem', marginLeft: '30px', height: '40px',
+                         marginLeft: '30px', height: '40px',
                         backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '20px'
                     }}><strong>Create Order</strong></button></Button>
             </div>
@@ -52,14 +53,14 @@ const FarmerOrder = () => {
                 <ul>
                     {order &&
                         order.map((orders, index) =>
-                            <li key={index}>
+                            <div key={index}>
 
                                 {orders?.isActive == true &&
-                                    <Card style={{
-                                        backgroundColor: 'rgb(212, 245, 212)', border: 'solid rgb(2, 112, 2) 3px',
-                                        margin: '10px 30px', borderRadius: '20px',
+                                    <div style={{
+                                        backgroundColor: 'rgb(212, 245, 212)',
+                                        margin: '10px 30px', borderRadius: '20px', padding:'20px'
                                     }} >
-                                        <Card.Header style={{ color: "white", background: "darkcyan", padding: '3px', width: '87.5vw' }}
+                                        <Card.Header style={{ color: "white", background: "darkcyan", padding: '3px' }}
                                             Align='center'
                                         >ID : {orders._id}</Card.Header>
 
@@ -85,24 +86,26 @@ const FarmerOrder = () => {
 
                                             <Card.Footer className="text-muted" style={{ marginLeft: '0px' }}>
                                                 {orders.isActive == true &&
-                                                    <Button variant="primary" href={`/farmer/updateorder/${orders._id}`}>
-                                                        <button style={{ backgroundColor: 'lightgreen', padding: '5px 30px', fontSize: '15px', borderRadius: '20px' }}><h4>Edit Order</h4></button>
-                                                    </Button>
+                                                    <a href={`/farmer/updateorder/${orders._id}`}>
+                                                        <button className="btn btn-primary"
+                                                        //  style={{ backgroundColor: 'lightgreen', padding: '5px 30px', fontSize: '15px', borderRadius: '20px' }}
+                                                         >Edit Order</button>
+                                                    </a>
                                                 }
                                             </Card.Footer>
 
                                         </Card.Body>
-                                    </Card>}
+                                    </div>}
                                 {orders?.isActive == false &&
-                                    <Card style={{
-                                        backgroundColor: 'rgb(243, 194, 174)', border: 'solid brown 3px',
-                                        margin: '10px 30px', borderRadius: '20px',
+                                    <div style={{
+                                        backgroundColor: '#EBA49F',
+                                        margin: '10px 30px', borderRadius: '20px', padding:'20px'
                                     }} >
-                                        <Card.Header style={{ color: "white", background: "brown", padding: '3px', width: '87.5vw' }}
+                                        <Card.Header style={{ color: "white", background: "brown", padding: '3px'  }}
                                             Align='center'
                                         >ID : {orders._id}</Card.Header>
 
-                                        <Card.Body style={{ padding: '20px 50px', fontSize: "20px" }}>
+                                        <Card.Body style={{  fontSize: "20px" }}>
 
                                             {orders.isActive == false &&
                                                 <div>
@@ -127,9 +130,9 @@ const FarmerOrder = () => {
                                             {/* <br />isActive :{JSON.stringify(orders.isActive)} */}
 
                                         </Card.Body>
-                                    </Card>}
+                                    </div>}
 
-                            </li>)}
+                            </div>)}
 
                 </ul>
 

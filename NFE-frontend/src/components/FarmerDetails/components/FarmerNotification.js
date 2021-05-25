@@ -8,6 +8,7 @@ import '../../Header/Header.css';
 import './Farmer.css'
 
 import { Card } from 'react-bootstrap';
+import { RiDivideFill } from "react-icons/ri";
 
 const FarmerNotification = () => {
     const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const FarmerNotification = () => {
     }
 
     return (
-        <div className="container" style={{backgroundColor: "rgb(215, 253, 232)"}}>
+        <div>
             <Header route={'/farmer/login'} LogOut={FLogOut} />
             <div>
 
@@ -45,19 +46,23 @@ const FarmerNotification = () => {
                     {notification &&
                         notification.map((orders, index) =>
 
-                            <li key={index}>
-                                <Card  style={{ backgroundColor:'rgb(212, 245, 212)',width: '92rem', height: '8rem', border: 'solid rgb(2, 112, 2) 3px',
-                                               margin: '10px 30px', borderRadius: '20px', }}>
-                                    <Card.Header  style={{ color: "white", background: "darkcyan", padding: '3px' ,width:'15.5rem' }} 
-                                                  as="h4" text='primary'> {orders.Date}{orders.time}</Card.Header>
-                                   
-                                    <Card.Body style={{ padding: '20px' }}>
+                            <div key={index}>
+                                <div style={{ 
+                                    backgroundColor:'rgb(212, 245, 212)',  
+                                               margin: '10px 10px ', borderRadius: '10px',padding:'10px' , height:'120px', display:'flex-wrap' }}>
+                                    <Card.Header  style={{ color: "white", background: "darkcyan",  margin:'10px 10px 10px 10px' , width:'15.5rem' }} 
+                                                  as="h5" text='primary' > {orders.Date}{orders.time}
+                                                  
+                                                  </Card.Header>
+                                                  
+                                    
+                                    <div style={{  padding:'10px'}}>
                                         
-                                            <h4>{orders.message}</h4> 
+                                           <h5>{orders.message}</h5> 
                                        
-                                    </Card.Body>
-                                </Card>
-                            </li>)}
+                                    </div>
+                                </div>
+                            </div>)}
 
                 </ul>
 

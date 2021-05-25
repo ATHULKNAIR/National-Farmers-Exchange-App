@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 import { getFarmerProfile } from '../services/farmerService';
 import { farmerLogout } from '../actions/auth'
 import Header from '../../Header/Header';
+import NavBar from '../../Navbar/NavBar';
 import '../../Header/Header.css';
+import './Farmer.css';
 
 const FarmerProfile = () => {
   const dispatch = useDispatch()
@@ -34,13 +36,16 @@ const FarmerProfile = () => {
   }
 
   return (
-    <div className="container">
+    <div >
       <Header route={'/farmer/login'} LogOut={FLogOut} />
-      <div>
-                <img src={farmer.photo} alt="Profile Pic"
+      <div className="profile-container">
+            <div >
+              <img src={farmer.photo} alt="Profile Pic"
                      className="profile-img-card"/>
-                     
             </div>
+                
+                     
+            
             <p>
                 <strong>Name : </strong>{farmer.name}
             </p>
@@ -61,7 +66,7 @@ const FarmerProfile = () => {
                 <strong>Product : </strong>{farmer.product}
             </p>
            
-            
+       </div>     
             
       {/* <strong>Order:</strong>
       <ul> 

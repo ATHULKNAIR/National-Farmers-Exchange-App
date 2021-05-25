@@ -53,7 +53,8 @@ import FarmerBidOrder from "./components/FarmerDetails/components/FarmerBidOrder
 import BuyerAcceptBid from "./components/BuyerDetails/components/BuyerAcceptBid";
 import BuyerRejectBid from "./components/BuyerDetails/components/BuyerRejectBid";
 
-import {clearMessage} from './components/BuyerDetails/actions/messages'
+import {clearMessage} from './components/BuyerDetails/actions/messages';
+import Header from './components/Header/Header'
 
 
 function App() {
@@ -77,7 +78,7 @@ function App() {
 
   return (
     <Router history={history}>
-        <div>
+        
         
         
           {/* {currentUser?.role == "Buyer" && (
@@ -98,7 +99,7 @@ function App() {
           )} */}
 
          
-<div className="container mt-3">
+            
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/farmer/login' component={FarmerLogin}/>
@@ -108,7 +109,7 @@ function App() {
             <Route exact path='/buyer/register' component={BuyerRegsiter}/>
 
             <Route  path='/buyer/profile' component={BuyerProfile}/>
-            <Route  path='/farmer/profile' component={FarmerProfile}/>
+            <Route  exact path='/farmer/profile' component={FarmerProfile}/>
 
             <Route  path='/farmer/editprofile' component={FarmerEditProfile}/>
             <Route  path='/buyer/editprofile' component={BuyerEditProfile}/>
@@ -149,8 +150,7 @@ function App() {
             <Route  path='/bids' component={Bidding}/>
             
           </Switch>
-        </div>
-      </div>
+        
       </Router>
     
   );

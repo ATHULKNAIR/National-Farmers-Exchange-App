@@ -36,7 +36,7 @@ const BuyerHome = () => {
     }
 
     return (
-        <div className="container">
+        <div >
             <Header route={'/buyer/login'} LogOut={BLogOut} />
 
             <ul>

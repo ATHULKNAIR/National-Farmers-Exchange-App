@@ -1,13 +1,14 @@
- .head {
-  background-color: #813772;
+.head {
+  background-color: #ffa500;
   display: flex;
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 5px;
   color: whitesmoke;
-   height: 15vh;
-} 
+  height: 15vh;
+  position: sticky;
+}
 
 .farm {
   position: relative;
@@ -29,6 +30,34 @@
   text-align: center;
   font-weight: 1000;
 }
-.logout-btn{
+.logout-btn {
   background-color: aliceblue;
-} 
+}
+
+.nav-link:hover {
+  /* text-transform: uppercase; */
+  text-align: center;
+  font-size: 18px;
+  text-decoration: none;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  /* font-family: "open-sans"; */
+  /* transition: 0.3s ease; */
+  /* border-top: 4px solid #ffffff; */
+  /* border-bottom: 4px solid #ffffff; */
+}
+
+.nav-link {
+  color: white;
+  font-size: 18px;
+  justify-content: space-between;
+  margin-left: 40px;
+  text-align: center;
+  display: flex;
+}
+
+.nav {
+  height: 50px;
+  text-align: center;
+}

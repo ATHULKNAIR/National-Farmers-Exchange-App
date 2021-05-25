@@ -11,6 +11,9 @@ import {buyerLogin} from '../actions/auth';
 import '../../Header/Header.css';
 import farm from '../../images/f-logo.jpg';
 import industry from '../../images/i-logo.jpg';
+import  {FaPhoneSquareAlt} from 'react-icons/fa';
+import {RiLockPasswordFill} from 'react-icons/ri';
+
 
 
 
@@ -89,21 +92,21 @@ const BuyerLogin = (props)=>{
                      className="profile-img-card" />
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
-                        <label htmlFor="name">Phone No :</label>
-                        <Input type="text" className="form-control" name="phoneNo" value={phoneNo} 
+                        <label htmlFor="name"><FaPhoneSquareAlt/></label>
+                        <Input type="text" className="form-control" name="phoneNo" value={phoneNo} placeholder="Mobile Number" 
                                onChange={onChangePhone} validations={[required]} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password :</label>
+                        <label htmlFor="password"><RiLockPasswordFill/></label>
                         <Input type="password" className="form-control" name="password"
                                value={password} onChange={onChangePassword} validations={[required]} />
                     </div>
-                    <div className="form-group">
+                    
                         <button className="btn btn-primary btn-block" disabled={loading}>
                             {loading && (<span className="spinner-border spinner-border-sm"></span>)}
                             <span>Login</span>
                         </button>
-                    </div>
+                    
   
                     {message && (
                         <div className="form-group">
@@ -117,6 +120,7 @@ const BuyerLogin = (props)=>{
                     </div>
                     
                 </Form>
+                <br/>
                 <p>New Customer? <a href="/buyer/register">Register</a></p>
             </div>
             
